@@ -1,0 +1,40 @@
+.articleMenu {
+  .articleMenu_header {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+
+    .articleMenu_title {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 27px;      
+      text-align: center;
+      color: #000000;
+    }
+  }
+  .articleMenu_element {
+    display: flex;
+    width: 255px;
+    height: 62px;
+    background: #E7E7E7;
+    border: 1px solid #CFCFCF;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 20px 0 20px 21px;
+    margin: 7px 0;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;    
+    font-feature-settings: 'salt' on, 'liga' off;
+    color: #757575;
+  }
+
+  .articleMenu_element_active {
+    background: #CFCFCF;
+  }
+}

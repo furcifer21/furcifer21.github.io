@@ -1,0 +1,38 @@
+.root {
+  background: #E7E7E7;
+  min-height: 100vh;
+
+  .mainLayout_header {
+    display: flex;
+    padding: 15px 11% 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 0px #E5E9F2;
+    align-items: center;
+    justify-content: space-between;
+
+    .mainLayout_header_leftMenu {
+
+      .mainLayout_header_leftMenu_button {
+        background-color: transparent;
+        border: none;
+        margin: 24px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+
+    .logoSvg {
+      position: absolute;
+      left: calc(50% - 44px);
+    }
+  }
+  
+  .mainLayout_content {
+    display: flex;
+    width: 89%;
+    margin: 0 11%;
+  }
+}
