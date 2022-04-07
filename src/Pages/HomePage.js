@@ -559,8 +559,8 @@ export const HomePage = (props) => {
                 <div className="container">
                     <h2>Работы, выполненные ГСК</h2>
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
-                        <a href="img/r1.png" data-fancybox="gallery" data-caption="">
-                            <img src={r1} className="raboti-img" alt=""/>
+                        <a href="#" data-fancybox="gallery" data-caption="">
+                            <img src="/public/images/r1.png" className="raboti-img" alt=""/>
                         </a>
                         <a href="img/r2.png" data-fancybox="gallery" data-caption="">
                             <img src={r2} className="raboti-img" alt=""/>
