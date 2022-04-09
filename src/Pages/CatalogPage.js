@@ -15,13 +15,6 @@ export const CatalogPage = (props) => {
     // значение по  умолчанию [] - пустой массив
     const [catalogCategories, setCatalogCategories] = useState(FAKE_PRODUCT_DATA_MAIN)
     const dispatch = useDispatch();
-    const fakeCatalogItems = [
-        {img: catalog1, name: 'Бетон', slug: '/catalog/catalogCategory1', count: '19 товаров'},
-        {img: catalog2, name: 'Песок', slug: '/catalog/catalogCategory2', count: '4 товара'},
-        {img: catalog3, name: 'Щебень', slug: '/catalog/catalogCategory3', count: '16 товаров'},
-        {img: catalog4, name: 'Гравий', slug: '/catalog/catalogCategory4', count: '3 товара'},
-        {img: catalog5, name: 'Арматура', slug: '/catalog/catalogCategory5', count: '18 товаров'}
-    ];
 
     useEffect(() => {
         dispatch(getProductCategories());
@@ -58,7 +51,7 @@ export const CatalogPage = (props) => {
                         <div className="name-row-item">
                             <h1>Каталог</h1>
                         </div>
-                        <div className="row-search">
+                        {/*<div className="row-search">
                             <form className="form search" action="" id="form-1">
                                 <input className="text-field w-input" name="" placeholder="Введите запрос" type="text"/>
                                 <select name="category">
@@ -69,7 +62,7 @@ export const CatalogPage = (props) => {
                                 </select>
                                 <button type="submit" className="btn search form-btn"></button>
                             </form>
-                        </div>
+                        </div>*/}
                     </div>
                     <hr/>
                 </div>

@@ -205,9 +205,9 @@ export const ProductPage = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row recommended">
+                            {/*<div className="row recommended">
                                 <h2 className="underline">Для работы вам потребуется</h2>
-                            </div>
+                            </div>*/}
                         </div>
                     </div>
                 </div>

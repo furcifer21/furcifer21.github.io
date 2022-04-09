@@ -105,9 +105,9 @@ export const CartPage = (props) => {
                     <form className="itog">
                         <div className="row cart-row ">
                             <div>
-                                <div className="cart_item-row br bg-wh">
-                                    <input type="text" className="cart_item text-field br"
-                                           placeholder="Введите промокод на скидку"/>
+                                <div className="cart_item-row br bg-wh justify-content-end">
+                                    {/*<input type="text" className="cart_item text-field br"
+                                           placeholder="Введите промокод на скидку"/>*/}
                                     <div className="cart_item-row-itog">ИТОГО:<span>5 730 ₽</span></div>
                                 </div>
                             </div>
