@@ -2670,10 +2670,6 @@ input[type="radio"]:checked+label:after {
         margin-right: 0px;
     }
 
-    .price-tabel-block {
-        min-width: 75%;
-    }
-
     h2 {
         font-size: 40px;
         line-height: 58px;
@@ -4265,5 +4261,11 @@ span.sr-only::after {
 @media (max-width: 768px) {
     .map > div {
         height: 235px;
+    }
+}
+
+@media (min-width: 998px) {
+    .price-tabel-block {
+        min-width: 75%;
     }
 }
