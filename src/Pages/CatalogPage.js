@@ -1,5 +1,5 @@
 import { getProductCategories, getAllProducts } from "../Redux/nameStore/action"
-import { useEffect } from "react"
+import {useEffect, useState} from "react"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import calk from '../img/catalog/calk.png'
@@ -9,23 +9,34 @@ import catalog3 from '../img/catalog/catalog3.png'
 import catalog4 from '../img/catalog/catalog4.png'
 import catalog5 from '../img/catalog/catalog5.png'
 import {Link} from "react-router-dom";
+import {FAKE_PRODUCT_DATA_MAIN} from "../constant";
 
 export const CatalogPage = (props) => {
-    const dispatch = useDispatch()
-    const productCategories = useSelector(data => data.productCategories)
+    // значение по  умолчанию [] - пустой массив
+    const [catalogCategories, setCatalogCategories] = useState(FAKE_PRODUCT_DATA_MAIN)
+    const dispatch = useDispatch();
     const fakeCatalogItems = [
         {img: catalog1, name: 'Бетон', slug: '/catalog/catalogCategory1', count: '19 товаров'},
         {img: catalog2, name: 'Песок', slug: '/catalog/catalogCategory2', count: '4 товара'},
         {img: catalog3, name: 'Щебень', slug: '/catalog/catalogCategory3', count: '16 товаров'},
         {img: catalog4, name: 'Гравий', slug: '/catalog/catalogCategory4', count: '3 товара'},
         {img: catalog5, name: 'Арматура', slug: '/catalog/catalogCategory5', count: '18 товаров'}
-    ]
-
-    console.log(productCategories);
+    ];
 
     useEffect(() => {
         dispatch(getProductCategories());
         props.seoCallback({title: 'Каталог', description: 'Описание каталога'});
+
+        // заглушка. получение данных по товарам для раздела "актуальный прайс"
+        /*axios.get(`${апи_урл}`)
+            .then(res => {
+                // полученный массив с данным ложим в стейт, который дальше мапится и все красиво
+                // сейчас в стейте лежат псевдо данные, при раскоменчивании их нужно убрать, оставив пустой массив
+                setCatalogCategories(res.data)
+            })
+            .catch(error => {
+                console.log(error);
+            });*/
     }, []);
 
     return (
@@ -66,16 +77,16 @@ export const CatalogPage = (props) => {
             <section className="content-body">
                 <div className="container">
                     <div className="row content-article">
-                        {fakeCatalogItems.map((catalogCategory, index) => {
+                        {catalogCategories.map((category, index) => {
                             return (
                                 <div key={`category-${index}`} className="article_item-row br bg-wh position-relative">
-                                    <Link to={catalogCategory.slug} className="fake-link-block"></Link>
+                                    <Link to={category.slug} className="fake-link-block"></Link>
                                     <div>
-                                        <img src={catalogCategory.img} className=""/>
+                                        <img src={category.img} className=""/>
                                     </div>
                                     <div>
-                                        <div className="article_item-row-name">{catalogCategory.name}</div>
-                                        <div className="article_item-row-sub">{catalogCategory.count}</div>
+                                        <div className="article_item-row-name">{category.name}</div>
+                                        <div className="article_item-row-sub">товаров: {category.products.length}</div>
                                     </div>
                                     <div className="view"></div>
                                 </div>

@@ -7,7 +7,7 @@ import {useLocation} from "react-router";
 
 export const Header = () => {
     const location = useLocation();
-    console.log(111,location.pathname)
+
     return (
         <header className={`${location.pathname !== '/' ? 'content-head' : '' }`}>
             <div className="container">
@@ -15,13 +15,13 @@ export const Header = () => {
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                         <ul className="navbar-nav ">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/">О компании</Link>
+                                <Link className="nav-link " to="/articles/about-company">О компании</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/catalog">Каталог товаров</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/articles-categories">Статьи</Link>
+                                <Link className="nav-link" to="/articles">Статьи</Link>
                             </li>
                         </ul>
                         <div className="contact-cart">
@@ -51,9 +51,15 @@ export const Header = () => {
                     <Link to="/" className="d-flex align-items-center">
                         <img className="logo" src={logo} alt=""/>
                     </Link>
-                    <Link to="/cart" className="d-flex align-items-center basket">
-                        <img className="" src={basket} alt=""/>
-                    </Link>
+                    <div className="d-flex align-items-center">
+                        <a href="tel:+74993777770" className="d-none d-lg-inline text-decoration-none" style={{color: "#18191F", marginRight: "16px", fontWeight: 500}}>+7(499)3777770 </a>
+                        <a href="tel:+74993777770" className="d-block d-lg-none" style={{marginRight: "16px"}}>
+                            <img src="/images/icon/phone.svg" width="24" alt="phone"/>
+                        </a>
+                        <Link to="/cart" className="d-flex align-items-center basket">
+                            <img className="" src={basket} alt=""/>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </header>

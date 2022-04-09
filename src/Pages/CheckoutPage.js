@@ -85,8 +85,8 @@ export const CheckoutPage = (props) => {
                                         </div>
                                         <div className="map zakaz">
                                         <YMaps>
-                                            <Map defaultState={{ center: [55.848303764148, 37.53532038434928], zoom: 9 }} width="100%" height="355">
-                                                <Placemark geometry={[55.848303764148, 37.53532038434928]} />
+                                            <Map defaultState={{ center: [55.74729850208165, 37.53905755617727], zoom: 9 }} width="100%" height="355">
+                                                <Placemark geometry={[55.74729850208165, 37.53905755617727]} />
                                             </Map>
                                         </YMaps></div>
                                     </div>

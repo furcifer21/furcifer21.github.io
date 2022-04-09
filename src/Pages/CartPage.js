@@ -114,12 +114,12 @@ export const CartPage = (props) => {
                         </div>
                         <div className="row cart-row-bottom">
                             <div>
-                                <button className="btn grey call" data-toggle="modal" data-target="#modal">
+                                <button type="button" className="btn grey" data-toggle="modal" data-target="#modal">
                                     Заказать звонок
                                 </button>
-                                <button type="button" className="btn grey" data-toggle="modal"
+                                {/*<button type="button" className="btn grey" data-toggle="modal"
                                         data-target="#modal">Быстрый заказ
-                                </button>
+                                </button>*/}
                                 <button className="btn org complete position-relative">
                                     <Link to="/checkout" className="fake-link-block"></Link>
                                     Оформить заказ

@@ -187,6 +187,7 @@ li.nav-item a {
     line-height: 20px;
     padding: 0;
     color: #18191F;
+    white-space: nowrap;
 }
 
 ol.breadcrumb {
@@ -912,6 +913,7 @@ button.btn.grey:hover {
 }
 
 .category-row-item {
+    margin-right: 30px;
     align-items: flex-start;
     font-weight: 700;
     font-size: 18px;
@@ -1696,7 +1698,7 @@ button.btn.cartblock-btn.lg {
     font-size: 16px;
     color: #000;
     border: 0;
-    padding: 0;
+    padding: 0 10px;
     background: #FFFFFF;
     display: block;
     width: 100%;
@@ -1965,7 +1967,7 @@ section#card {
 }
 
 .price-tabel-block {
-    min-width: 83%;
+    min-width: 100%;
 }
 
 .contact-cart {
@@ -2208,7 +2210,7 @@ section.articles .article {
 }
 
 #articles .row {
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 footer a {
@@ -2311,7 +2313,7 @@ footer {
     background: #E7E7E7;
     margin-top: 2px;
     color: #000;
-    padding: 90px 0 130px;
+    padding: 90px 0 0px;
 }
 
 footer>div {
@@ -2586,7 +2588,7 @@ input[type="radio"]:checked+label:after {
     }
 
     footer {
-        padding: 90px 15px 130px;
+        padding: 90px 15px 0px;
     }
 
     #poraydok .row-cols-1 {

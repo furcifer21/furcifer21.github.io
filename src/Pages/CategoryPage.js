@@ -6,29 +6,32 @@ import {useEffect, useState} from "react"
 import { ProductItem } from "../Components/ProductItem"
 import classNames from "classnames"
 import {getProductCategories} from "../Redux/nameStore/action";
+import {FAKE_PRODUCT_DATA} from "../constant";
+import {Link} from "react-router-dom";
+import {useLocation} from "react-router";
+import {CategoryMenu} from "../Components/CategoryMenu";
 
 export const CategoryPage = (props) => {
-    /*const produts = useSelector(state => state.allProducts)*/
-    const [currentItem, setCurrentItem] = useState(0)
-    const [currentCategory, setCurrentcategory] = useState(0)
-    const fakeProducts = [
-        {
-            img: '',
-            name: 'Бетон M100   B7,5 F100 W4 (Гравий)',
-            link: '/product1',
-            price: '3 310',
-        },
-        {
-            img: '',
-            name: 'Бетон M100   B7,5 F100 W4 (Гравий)',
-            link: '/product2',
-            price: '3 310',
-        },
-    ];
+    const location = useLocation();
+    // значение по  умолчанию [] - пустой массив
+    const [categoryData, setCategoryData] = useState(FAKE_PRODUCT_DATA);
+    const categorySlug = props.subSlug ? location.pathname.split('/')[2] : location.pathname.split('/')[2]
 
+    console.log(777777, props, categorySlug, location.pathname.split('/'))
     useEffect(() => {
         props.seoCallback({title: 'Категория товаров', description: 'Описание каталога'});
-    }, []);
+
+        // заглушка. получение данных по товарам для раздела "актуальный прайс"
+        /*axios.get(`${апи_урл/catalog/}`)
+            .then(res => {
+                // полученный массив с данным ложим в стейт, который дальше мапится и все красиво
+                // сейчас в стейте лежат псевдо данные, при раскоменчивании их нужно убрать, оставив пустой массив
+                setCategoryData(res.data)
+            })
+            .catch(error => {
+                console.log(error);
+            });*/
+    }, [location.pathname]);
 
     return (
         <>
@@ -37,8 +40,12 @@ export const CategoryPage = (props) => {
                     <div className="row">
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="#">Каталог</a></li>
-                                <li className="breadcrumb-item"><a href="#">Товарный бетон</a></li>
+                                <li className="breadcrumb-item">
+                                    <Link to="/catalog">Каталог</Link>
+                                </li>
+                                <li className="breadcrumb-item">
+                                    <Link to={`/catalog/${categorySlug}`}>Товарный бетон</Link>
+                                </li>
                                 <li className="breadcrumb-item active" aria-current="page">Бетон на гравийном щебне</li>
                             </ol>
                         </nav>
@@ -47,27 +54,21 @@ export const CategoryPage = (props) => {
                 <div className="container">
                     <div className="row name-row">
                         <div className="name-row-item">
-                            <h1>Товарный бетон <span className="num">(47)</span></h1>
+                            <h1>{categoryData.name} <span className="num">({categoryData.products.length})</span></h1>
                         </div>
                     </div>
                     <hr/>
-                    <div className="row category-row">
-                        <div className={classNames("category-row-item br r", {'active': currentCategory === 0})}
-                             onClick={() => setCurrentcategory(0)}>Бетон на гравийном щебне
-                            <span>100 товаров</span>
-                        </div>
-                        <div className={classNames("category-row-item br r", {'active': currentCategory === 1})}
-                             onClick={() => setCurrentcategory(1)}>Бетон на гравийном щебне
-                            <span>78 товаров товаров</span>
-                        </div>
-                        <div className={classNames("category-row-item br r", {'active': currentCategory === 2})}
-                             onClick={() => setCurrentcategory(2)}>Керамзитобетон
-                            <span>94 товаров товаров</span>
-                        </div>
-                        <div className={classNames("category-row-item br r", {'active': currentCategory === 3})}
-                             onClick={() => setCurrentcategory(3)}>Мостовой бетон
-                            <span>45 товаров</span>
-                        </div>
+                    <div className="row category-row justify-content-start">
+                        {categoryData.subCategories.length > 0 &&
+                            categoryData.subCategories.map((sub, index) => {
+                                return (
+                                    <div key={`subcategory-${index}`} className={`category-row-item br r position-relative ${location.pathname === `/catalog/${categorySlug}/${sub.slug}` ? 'active' : ''}`}>
+                                        <Link to={`/catalog/${categorySlug}/${sub.slug}`} className="fake-link-block"></Link>
+                                        {sub.name}<span>100 товаров</span>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                     <hr/>
                 </div>
@@ -75,39 +76,21 @@ export const CategoryPage = (props) => {
             <section className="catalog-body">
                 <div className="container">
                     <div className="row justify-content-between">
-                        <div className="col-sidbar-left">
-                            <div className="sidbar-left-name"><img src={widget} alt=""/>Каталог</div>
-                            {/* <div className="sidbar-left-item active br">Товарный бетон</div> */}
-                            <div className={classNames("sidbar-left-item br", {'active': currentItem === 0})}
-                                 onClick={() => setCurrentItem(0)}>Товарный бетон
-                            </div>
-                            <div className={classNames("sidbar-left-item br", {'active': currentItem === 1})}
-                                 onClick={() => setCurrentItem(1)}>Цементные растворы
-                            </div>
-                            <div className={classNames("sidbar-left-item br", {'active': currentItem === 2})}
-                                 onClick={() => setCurrentItem(2)}>Цементные смеси
-                            </div>
-                            <div className={classNames("sidbar-left-item br", {'active': currentItem === 3})}
-                                 onClick={() => setCurrentItem(3)}>Аренда техники
-                            </div>
-                            <div className={classNames("sidbar-left-item br", {'active': currentItem === 4})}
-                                 onClick={() => setCurrentItem(4)}>Сыпучие материалы
-                            </div>
-                            <div className={classNames("sidbar-left-item br", {'active': currentItem === 5})}
-                                 onClick={() => setCurrentItem(5)}>Рассчитать стоимость доставки
-                            </div>
-                        </div>
+                        <CategoryMenu categories={categoryData.allCategories} pageSlug={props.subSlug ? location.pathname.split('/')[2] : location.pathname.split('/')[2]}/>
                         <div className="col-content">
                             <div className="content-filtr"><img src={union} alt=""/>По умолчанию <span>(возрастание)<img
                                 src={polygon} alt=""/></span>
                             </div>
                             <hr/>
                             <div className="row catalog_produkt">
-                                {fakeProducts.map((item, index) => {
-                                    return (
-                                        <ProductItem key={`product-${index}`} item={item}/>
-                                    )
-                                })}
+                                {categoryData.products.length > 0 &&
+                                    categoryData.products.map((item, index) => {
+                                        console.log(888,item)
+                                        return (
+                                            <ProductItem key={`product-${index}`} item={item}/>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
