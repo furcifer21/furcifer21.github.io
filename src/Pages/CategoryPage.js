@@ -15,11 +15,19 @@ export const CategoryPage = (props) => {
     const location = useLocation();
     // значение по  умолчанию [] - пустой массив
     const [categoryData, setCategoryData] = useState(FAKE_PRODUCT_DATA);
+    const [categoryMenu, setCategoryMenu] = useState(FAKE_PRODUCT_DATA.allCategories);
+    const [subCategoryMenu, setSubCategoryMenu] = useState(FAKE_PRODUCT_DATA.subCategories);
+    const [productsData, setProductsData] = useState(FAKE_PRODUCT_DATA.products);
     const categorySlug = props.subSlug ? location.pathname.split('/')[2] : location.pathname.split('/')[2]
 
     console.log(777777, props, categorySlug, location.pathname.split('/'))
     useEffect(() => {
         props.seoCallback({title: 'Категория товаров', description: 'Описание каталога'});
+
+       /* setCategoryData()
+        setCategoryMenu()
+        setSubCategoryMenu()
+        setProductsData()*/
 
         // заглушка. получение данных по товарам для раздела "актуальный прайс"
         /*axios.get(`${апи_урл/catalog/}`)
@@ -59,8 +67,8 @@ export const CategoryPage = (props) => {
                     </div>
                     <hr/>
                     <div className="row category-row justify-content-start">
-                        {categoryData.subCategories.length > 0 &&
-                            categoryData.subCategories.map((sub, index) => {
+                        {subCategoryMenu.length > 0 &&
+                            subCategoryMenu.map((sub, index) => {
                                 return (
                                     <div key={`subcategory-${index}`} className={`category-row-item br r position-relative ${location.pathname === `/catalog/${categorySlug}/${sub.slug}` ? 'active' : ''}`}>
                                         <Link to={`/catalog/${categorySlug}/${sub.slug}`} className="fake-link-block"></Link>
@@ -76,16 +84,15 @@ export const CategoryPage = (props) => {
             <section className="catalog-body">
                 <div className="container">
                     <div className="row justify-content-between">
-                        <CategoryMenu categories={categoryData.allCategories} pageSlug={props.subSlug ? location.pathname.split('/')[2] : location.pathname.split('/')[2]}/>
+                        <CategoryMenu categories={categoryMenu} pageSlug={props.subSlug ? location.pathname.split('/')[2] : location.pathname.split('/')[2]}/>
                         <div className="col-content">
-                            <div className="content-filtr"><img src={union} alt=""/>По умолчанию <span>(возрастание)<img
+                            {/*<div className="content-filtr"><img src={union} alt=""/>По умолчанию <span>(возрастание)<img
                                 src={polygon} alt=""/></span>
                             </div>
-                            <hr/>
+                            <hr/>*/}
                             <div className="row catalog_produkt">
-                                {categoryData.products.length > 0 &&
-                                    categoryData.products.map((item, index) => {
-                                        console.log(888,item)
+                                {productsData.length > 0 &&
+                                    productsData.map((item, index) => {
                                         return (
                                             <ProductItem key={`product-${index}`} item={item}/>
                                         )
@@ -96,14 +103,6 @@ export const CategoryPage = (props) => {
                     </div>
                 </div>
             </section>
-
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossOrigin="anonymous"></script>
-            <script src="slick/slick.js" charSet="utf-8"></script>
-            <script src="dist/js/bootstrap.bundle.min.js"></script>
-            <script src="js/main.js"></script>
-            <script src="dist/jquery.fancybox.min.js"></script>
-            <script src="dist/js/popper.min.js"></script>
         </>
     )
 }

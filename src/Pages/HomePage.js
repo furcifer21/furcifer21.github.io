@@ -23,6 +23,9 @@ import {Link} from "react-router-dom";
 import {Map, Placemark, YMaps} from "react-yandex-maps";
 import {FAKE_PRODUCT_DATA_MAIN} from "../constant";
 import axios from "axios";
+import $ from "jquery";
+import InputMask from "react-input-mask";
+import {checkPhone, validateNumber} from "../Components/helper";
 
 export const HomePage = (props) => {
     // значение по  умолчанию [] - пустой массив
@@ -49,6 +52,7 @@ export const HomePage = (props) => {
         // заглушка. получение данных по товарам для раздела "актуальный прайс"
         /*axios.get(`${апи_урл}`)
             .then(res => {
+                console.log('таблица товаров на главной', res)
                 // полученный массив с данным ложим в стейт, который дальше мапится и все красиво
                 // сейчас в стейте лежат псевдо данные, при раскоменчивании их нужно убрать, оставив пустой массив
                 setPriceData(res.data)
@@ -57,6 +61,26 @@ export const HomePage = (props) => {
                 console.log(error);
             });*/
     }, []); // Will trigger only once
+
+    function sendForm() {
+        const phoneVal = topPhone.trim();
+        const formData = {
+            name: topName.trim(),
+            phone: phoneVal,
+        };
+
+        if(checkPhone(phoneVal) || (phoneVal !== '')) {
+            $('#success-modal').modal('show');
+
+            /*axios.post(`${апи_урл}`, formData)
+                .then(res => {
+                    $('#success-modal').modal('show');
+                })
+                .catch(error => {
+                    console.log(error);
+                });*/
+        }
+    }
 
     return (
         <>
@@ -132,15 +156,14 @@ export const HomePage = (props) => {
                                         />
                                     </div>
                                     <div>
-                                        <input type="tel"
-                                               className="phone-input text-field w-input"
-                                               name="phone"
-                                               placeholder="Ваш телефон"
-                                               required="required"
-                                               value={topPhone}
-                                               onChange={(e) => setTopPhone(e.target.value)}
+                                        <InputMask className="phone-input text-field w-input"
+                                                   name="phone"
+                                                   placeholder="Ваш телефон"
+                                                   mask="+7 (999) 999-99-99"
+                                                   value={topPhone}
+                                                   onChange={(e) => setTopPhone(e.target.value)}
                                         />
-                                        <button type="submit" className="btn blk form-btn">Заказать звонок</button>
+                                        <button type="button" className="btn blk form-btn" onClick={sendForm}>Заказать звонок</button>
                                     </div>
                                 </div>
                             </form>
@@ -195,7 +218,10 @@ export const HomePage = (props) => {
                                                             return (
                                                                 <tr key={`product-${i}`}>
                                                                     <th className="flex" scope="row"><span>{product.mark}</span><span> {product.class}</span></th>
-                                                                    <td>{product.name}</td>
+                                                                    <td className="position-relative">
+                                                                        <Link to={`/product/${product.slug}`} className="fake-link-block"></Link>
+                                                                        {product.name}
+                                                                    </td>
                                                                     <td>{product.price} ₽</td>
                                                                     <td className="no-br">
                                                                         <div className="number" data-step="1" data-min="1" data-max="100">
@@ -262,7 +288,7 @@ export const HomePage = (props) => {
                     </div>
                 </div>
             </section>
-            <section id="calk-banner" className="bg-wh">
+            {/*<section id="calk-banner" className="bg-wh">
                 <div className="container">
                     <div className="banner org br">
                         <div className="bannerbody-calk">
@@ -273,7 +299,7 @@ export const HomePage = (props) => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>*/}
             {/*<section id="raboti" className="bg-wh">
                 <div className="container">
                     <h2>Работы, выполненные ГСК</h2>
@@ -307,6 +333,12 @@ export const HomePage = (props) => {
                                 где за сутки производится свыше 2000 м3 бетона в сутки. В распоряжении
                                 ГСК также находиться собственный парк спецтехники, а также дополнительного
                                 оборудования, которое позволяет значительно облегчить работу.
+                            </div>
+                            <div className="mt-4">
+                                <button type="button" className="btn org position-relative cartblock-btn">
+                                    <Link to="/articles/about-company" className="fake-link-block"></Link>
+                                    Подробнее о ГСК
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -406,16 +438,14 @@ export const HomePage = (props) => {
                     <div className="row">
                         <div className="col-md-4">
                             <div className="title-block">25+<span>Партнёры ГСК</span></div>
-                            <div className="dscr">Партнёров Главной Строительной компании. Короткий екст про
-                                сотрудничество и совместные проекты
-                            </div>
+                            <div className="dscr">Партнёров Главной Строительной компании.</div>
                         </div>
                         <div className="col-md-8">
                             <div className="row row-cols-partners">
-                                <div className="item-partners"><img src={image7} className="img-partners" alt=""/></div>
-                                <div className="item-partners"><img src={image8} className="img-partners" alt=""/></div>
-                                <div className="item-partners"><img src={image6} className="img-partners" alt=""/></div>
-                                <div className="item-partners"><img src={image9} className="img-partners" alt=""/></div>
+                                <div className="item-partners d-flex align-items-center justify-content-center"><img src={image7} className="img-partners" alt=""/></div>
+                                <div className="item-partners d-flex align-items-center justify-content-center"><img src={image8} className="img-partners" alt=""/></div>
+                                <div className="item-partners d-flex align-items-center justify-content-center"><img src={image6} className="img-partners" alt=""/></div>
+                                <div className="item-partners d-flex align-items-center justify-content-center"><img src={image9} className="img-partners" alt=""/></div>
 
                             </div>
                         </div>
@@ -427,7 +457,6 @@ export const HomePage = (props) => {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2">
                         <div className="contact-left">
                             <h2>Контакты</h2>
-                            <h3>Собственные бетонные заводы</h3>
                             <div className="map">
                                 <YMaps>
                                     <Map defaultState={{ center: [55.74729850208165, 37.53905755617727], zoom: 9 }} width="100%" height="355">

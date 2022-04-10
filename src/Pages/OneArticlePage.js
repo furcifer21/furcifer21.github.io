@@ -2,16 +2,39 @@ import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
 import {articles} from "../articlesHTMLText";
 import {Link} from "react-router-dom";
+import $ from "jquery";
 
 export const OneArticlePage = (props) => {
     const [nameInput, setNameInput] = useState('');
     const [emailInput, setEmailInput] = useState('');
+    const [textInput, setTextInput] = useState('');
     const [agreeCheckbox, setAgreeCheckbox] = useState(true);
     const location = useLocation();
 
     useEffect(() => {
         props.seoCallback({title: 'Статья', description: 'Описание каталога'});
     }, []);
+
+    function sendForm() {
+        const formData = {
+            name: nameInput.trim(),
+            email: emailInput.trim(),
+            text: textInput.trim(),
+        }
+
+        if(agreeCheckbox && (emailInput.trim() !== '')) {
+            $('#success-modal').modal('show');
+
+            /*axios.post(`${апи_урл}`, formData)
+                .then(res => {
+                     $('#modal').modal('hide');
+                    $('#success-modal').modal('show');
+                })
+                .catch(error => {
+                    console.log(error);
+                });*/
+        }
+    }
 
     return (
         <>
@@ -78,7 +101,6 @@ export const OneArticlePage = (props) => {
                         </div>*/}
                         <div>
                             <div className="row articles">
-                                <h3 className="articles-name">{articles[location.pathname].name}</h3>
                                 <div dangerouslySetInnerHTML={{__html: articles[location.pathname].textHtml}}></div>
                                 <div className="col question">
                                     <div className="form-title">Остались вопросы?</div>
@@ -115,8 +137,8 @@ export const OneArticlePage = (props) => {
                                             <label htmlFor="cb1">
                                                 Я согласен на <a href="#">обработку персональных данных</a>
                                             </label>
-                                            <button type="submit" className="btn org  main-btn form-btn">Отправить
-                                                письмо
+                                            <button type="button" className="btn org main-btn form-btn" onClick={sendForm}>
+                                                Отправить письмо
                                             </button>
                                         </div>
                                     </form>
@@ -126,15 +148,6 @@ export const OneArticlePage = (props) => {
                     </div>
                 </div>
             </section>
-
-
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossOrigin="anonymous"></script>
-            <script src="slick/slick.js" charSet="utf-8"></script>
-            <script src="dist/js/bootstrap.bundle.min.js"></script>
-            <script src="js/main.js"></script>
-            <script src="dist/jquery.fancybox.min.js"></script>
-            <script src="dist/js/popper.min.js"></script>
         </>
     )
 }

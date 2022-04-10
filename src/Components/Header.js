@@ -15,13 +15,19 @@ export const Header = () => {
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                         <ul className="navbar-nav ">
                             <li className="nav-item">
-                                <Link className="nav-link " to="/articles/about-company">О компании</Link>
+                                <Link className="nav-link " to="/">Главная</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/catalog">Каталог товаров</Link>
+                                <Link className="nav-link" to="/catalog">Каталог</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/articles">Статьи</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link " to="/articles/about-company">Контакты</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link " to="/articles/about-company">О Нас</Link>
                             </li>
                         </ul>
                         <div className="contact-cart">
@@ -52,13 +58,13 @@ export const Header = () => {
                         <img className="logo" src={logo} alt=""/>
                     </Link>
                     <div className="d-flex align-items-center">
-                        <a href="tel:+74993777770" className="d-none d-lg-inline text-decoration-none" style={{color: "#18191F", marginRight: "16px", fontWeight: 500}}>+7(499)3777770 </a>
-                        <a href="tel:+74993777770" className="d-block d-lg-none" style={{marginRight: "16px"}}>
+                        <a href="tel:+74993777770" className="header-phone d-flex align-items-center justify-content-center">
                             <img src="/images/icon/phone.svg" width="24" alt="phone"/>
                         </a>
-                        <Link to="/cart" className="d-flex align-items-center basket">
+                        <a href="tel:+74993777770" className="d-none d-lg-inline text-decoration-none" style={{color: "#18191F", marginLeft: "4px", fontWeight: 500}}>+7(499)3777770 </a>
+                        {/*<Link to="/cart" className="d-flex align-items-center basket">
                             <img className="" src={basket} alt=""/>
-                        </Link>
+                        </Link>*/}
                     </div>
                 </div>
             </div>

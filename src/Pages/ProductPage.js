@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
 import {FAKE_PRODUCT_DATA} from "../constant";
 import {CategoryMenu} from "../Components/CategoryMenu";
@@ -64,21 +64,6 @@ export const ProductPage = (props) => {
                         </div>*/}
                     </div>
                     <hr className="none"/>
-                    <div className="row category-row">
-                        <div className="category-row-item br active">Бетон на гравийном щебне
-                            <span>100 товаров</span>
-                        </div>
-                        <div className="category-row-item br ">Бетон на гравийном щебне
-                            <span>78 товаров товаров</span>
-                        </div>
-                        <div className="category-row-item br ">Керамзитобетон
-                            <span>94 товаров товаров</span>
-                        </div>
-                        <div className="category-row-item br">Мостовой бетон
-                            <span>45 товаров</span>
-                        </div>
-                    </div>
-                    <hr className="none"/>
                 </div>
             </section>
             <section className="catalog-body">
@@ -91,26 +76,20 @@ export const ProductPage = (props) => {
                                     <div className="product_item-row br bg-wh">
                                         <div className="product_item-row-name">Бетон М100 В7,5 F100 W4 (Гравий)</div>
                                         <div className="product_item-row-price">3 310 ₽/м3</div>
-                                        <div className="number" data-step="1" data-min="1" data-max="100">
+                                        {/*<div className="number" data-step="1" data-min="1" data-max="100">
                                             <a href="#" className="number-minus">−</a><input className="number-text"
                                                                                              type="text" name="count"
                                                                                              value="0"/>
                                             <a href="#" className="number-plus">+</a>
-                                        </div>
+                                        </div>*/}
                                         <div className="price">3 310 ₽</div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row prod-img row-cols-1 row-cols-sm-3 row-cols-md-3 ">
-                                <a href="/images/product/beton.png" data-fancybox="gallery" data-caption="">
-                                    <img src="..//images/product/beton.png" className="raboti-img" alt=""/>
-                                </a>
-                                <a href="/images/product/beton1.png" data-fancybox="gallery" data-caption="">
-                                    <img src="..//images/product/beton1.png" className="raboti-img" alt=""/>
-                                </a>
-                                <a href="/images/product/beton2.png" data-fancybox="gallery" data-caption="">
-                                    <img src="..//images/product/beton2.png" className="raboti-img" alt=""/>
-                                </a>
+                                <img src="..//images/product/beton.png" className="raboti-img" alt=""/>
+                                <img src="..//images/product/beton1.png" className="raboti-img" alt=""/>
+                                <img src="..//images/product/beton2.png" className="raboti-img" alt=""/>
                             </div>
                             <div className="inf d-lg-none">
                                 <div className="cat">Товарный бетон</div>
@@ -196,15 +175,19 @@ export const ProductPage = (props) => {
                                         </div>
                                         <div className="tab-pane fade show " id="tab3" role="tabpanel"
                                              aria-labelledby="tab3-tab">
-                                            <div className="dscr">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Condimentum diam orci pretium a pharetra, feugiat cursus. Dictumst
-                                                risus, sem egestas odio cras adipiscing vulputate. Nisi, risus in
-                                                suscipit non. Non commodo volutpat, pharetra, vel.
+                                            <div className="dscr">
+                                                <div style={{fontWeight: 500}}>1. Наличными при доставке водителю</div>
+                                                <div className="mt-3">Во время оформления заказа возможно выбрать наличную форму оплаты. В этом случае денежные средства передаются водителю в момент приезда на строительную площадку.</div>
+                                                <div className="mt-4" style={{fontWeight: 500}}>2. Оплата по счету</div>
+                                                <div className="mt-3">Во время оформления заказа возможно выбрать форму оплаты по счету. В этом случае, вам будет выписан счет на оплату в электронном виде.</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <button className="btn org cartblock-btn lgx mt-4" data-toggle="modal" data-target="#modal">
+                                Купить
+                            </button>
                             {/*<div className="row recommended">
                                 <h2 className="underline">Для работы вам потребуется</h2>
                             </div>*/}

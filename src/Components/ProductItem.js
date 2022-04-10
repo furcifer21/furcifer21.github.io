@@ -1,5 +1,6 @@
 import product1 from '../img/product/1.png'
 import {Link} from "react-router-dom";
+import React from "react";
 
 export const ProductItem = ({item}) => {
     return (
@@ -17,8 +18,14 @@ export const ProductItem = ({item}) => {
                 </div>*/}
             </div>
             <div className="inf">
-                <div className="cat">Товарный бетон</div>
-                <div className="tittle_product">{item.name}</div>
+                <div className="cat position-relative">
+                    <Link to={`/catalog/#`} className="fake-link-block"></Link>
+                    Товарный бетон
+                </div>
+                <div className="tittle_product position-relative mb-2">
+                    <Link to={`/product/${item.link}`} className="fake-link-block"></Link>
+                    {item.name}
+                </div>
                 <div className="prod_row">
                     <div className="price">{item.price} ₽<span>/м3</span></div>
                     {/*<div className="rating-mini">
@@ -30,12 +37,12 @@ export const ProductItem = ({item}) => {
                     </div>*/}
                 </div>
                 <div className="prod_row">
-                    <div className="number" data-step="1" data-min="1" data-max="100">
+                    {/*<div className="number" data-step="1" data-min="1" data-max="100">
                         <a href="#" className="number-minus">−</a><input className="number-text" type="text" name="count" value="0"/>
                         <a href="#" className="number-plus">+</a>
-                    </div>
-                    <button className="btn in_cart">
-                        В корзину
+                    </div>*/}
+                    <button className="btn in_cart" data-toggle="modal" data-target="#modal">
+                        Купить
                     </button>
                 </div>
             </div>

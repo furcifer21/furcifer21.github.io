@@ -5,11 +5,6 @@ export const AllArticlesPage = (props) => {
     const articlesInfo = [
         {
             img: '/images/articles/atc1.png',
-            name: 'О "Главной Строительной Компании"',
-            slug: 'about-company',
-        },
-        {
-            img: '/images/articles/atc1.png',
             name: 'Арматура 25г2с и А500: различие',
             slug: 'razlichia-armaturi',
         },
@@ -44,7 +39,7 @@ export const AllArticlesPage = (props) => {
                         </div>
                     </div>
                     <hr/>
-                    <div className="row  justify-content-between row-cols-1 row-cols-sm-2 row-cols-md-2 ">
+                    <div className="row justify-content-around row-cols-1 row-cols-sm-2 row-cols-md-2 ">
                         {articlesInfo.map((article, index) => {
                             return (
                                 <div key={`article-${index}`} className="article d-flex flex-column justify-content-between">

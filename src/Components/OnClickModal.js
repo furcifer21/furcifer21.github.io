@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from "react";
+import InputMask from "react-input-mask";
+import {checkPhone} from "./helper";
+import $ from "jquery";
 
 export const OnClickModal = (props) => {
     const [modalName, setModalName] = useState('');
@@ -6,9 +9,33 @@ export const OnClickModal = (props) => {
     const [modalEmail, setModalEmail] = useState('');
     const [agreeCheckbox, setAgreeCheckbox] = useState(true);
 
+    function sendForm() {
+        const phoneVal = modalPhone.trim();
+        const emailVal = modalEmail.trim();
+        const formData = {
+            name: modalName.trim(),
+            phone: phoneVal,
+            email: emailVal,
+        };
+
+        if(agreeCheckbox && (emailVal !== '')) {
+            $('#modal').modal('hide');
+            $('#success-modal').modal('show');
+
+            /*axios.post(`${апи_урл}`, formData)
+                .then(res => {
+                     $('#modal').modal('hide');
+                    $('#success-modal').modal('show');
+                })
+                .catch(error => {
+                    console.log(error);
+                });*/
+        }
+    }
+
     return (
         <div className="modal fade" id="modal" tabIndex="-1" aria-labelledby="modal" aria-hidden="true">
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <button type="button" className="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     <div className="modal-title">Купить в один клик</div>
@@ -26,14 +53,12 @@ export const OnClickModal = (props) => {
                                    value={modalName}
                                    onChange={(e) => setModalName(e.target.value)}
                             />
-                            <input className="phone-input text-field w-input"
-                                   name="phone"
-                                   maxLength="256"
-                                   placeholder="Телефон"
-                                   required="required"
-                                   type="tel"
-                                   value={modalPhone}
-                                   onChange={(e) => setModalPhone(e.target.value)}
+                            <InputMask className="phone-input text-field w-input"
+                                       name="phone"
+                                       placeholder="Телефон"
+                                       mask="+7 (999) 999-99-99"
+                                       value={modalPhone}
+                                       onChange={(e) => setModalPhone(e.target.value)}
                             />
                             <input className="text-field w-input"
                                    name="email"
@@ -51,7 +76,7 @@ export const OnClickModal = (props) => {
                             <label htmlFor="cb1">
                                 Я согласен на <a href="#">обработку персональных данных</a>
                             </label>
-                            <button type="submit" className="btn org  main-btn form-btn">Отправить</button>
+                            <button type="button" className="btn org  main-btn form-btn" onClick={sendForm}>Отправить</button>
                         </form>
                     </div>
                 </div>

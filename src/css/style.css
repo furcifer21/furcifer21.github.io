@@ -1220,11 +1220,20 @@ h2 {
     opacity: 50%;
 }
 
+.header-phone img {
+    width: 20px;
+    height: 20px;
+}
+
 .basket {
+    margin-left: 32px;
+}
+
+.basket, .header-phone {
     background: rgb(11 13 23 / 10%);
     border-radius: 50%;
-    height: 27px;
-    width: 27px;
+    height: 32px;
+    width: 32px;
     justify-content: center;
 }
 
@@ -4267,5 +4276,16 @@ span.sr-only::after {
 @media (min-width: 998px) {
     .price-tabel-block {
         min-width: 75%;
+    }
+}
+
+#card .row {
+    margin-left: calc(-1.0 * var(--bs-gutter-x));
+    margin-right: calc(-1.0 * var(--bs-gutter-x));
+}
+@media (min-width: 1500px){
+    section#card {
+        margin-top: -22vh;
+        margin-bottom: -15vh;
     }
 }

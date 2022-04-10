@@ -9,11 +9,11 @@ import catalog3 from '../img/catalog/catalog3.png'
 import catalog4 from '../img/catalog/catalog4.png'
 import catalog5 from '../img/catalog/catalog5.png'
 import {Link} from "react-router-dom";
-import {FAKE_PRODUCT_DATA_MAIN} from "../constant";
+import {FAKE_PRODUCT_DATA_MAIN, REAL_FAKE_DATA} from "../constant";
 
 export const CatalogPage = (props) => {
     // значение по  умолчанию [] - пустой массив
-    const [catalogCategories, setCatalogCategories] = useState(FAKE_PRODUCT_DATA_MAIN)
+    const [catalogCategories, setCatalogCategories] = useState(REAL_FAKE_DATA)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export const CatalogPage = (props) => {
         props.seoCallback({title: 'Каталог', description: 'Описание каталога'});
 
         // заглушка. получение данных по товарам для раздела "актуальный прайс"
-        /*axios.get(`${апи_урл}`)
+        /*axios.get(`${апи_урл/getAllProducts}`)
             .then(res => {
                 // полученный массив с данным ложим в стейт, который дальше мапится и все красиво
                 // сейчас в стейте лежат псевдо данные, при раскоменчивании их нужно убрать, оставив пустой массив
@@ -73,19 +73,19 @@ export const CatalogPage = (props) => {
                         {catalogCategories.map((category, index) => {
                             return (
                                 <div key={`category-${index}`} className="article_item-row br bg-wh position-relative">
-                                    <Link to={category.slug} className="fake-link-block"></Link>
+                                    <Link to={category.typeSlug} className="fake-link-block"></Link>
                                     <div>
                                         <img src={category.img} className=""/>
                                     </div>
                                     <div>
-                                        <div className="article_item-row-name">{category.name}</div>
+                                        <div className="article_item-row-name">{category.type}</div>
                                         <div className="article_item-row-sub">товаров: {category.products.length}</div>
                                     </div>
                                     <div className="view"></div>
                                 </div>
                             )
                         })}
-                        <div className="article_item-row calk-item br bg-wh position-relative">
+                        {/*<div className="article_item-row calk-item br bg-wh position-relative">
                             <Link to="/calculate" className="fake-link-block"></Link>
                             <div><img src={calk} className=""/></div>
                             <div>
@@ -93,7 +93,7 @@ export const CatalogPage = (props) => {
                                 <div className="article_item-row-sub">Онлайн-калькулятор</div>
                             </div>
                             <div className="view"></div>
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
             </section>

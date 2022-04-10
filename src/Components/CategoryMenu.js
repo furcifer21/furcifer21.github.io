@@ -16,10 +16,10 @@ export const CategoryMenu = ({categories, pageSlug}) => {
                     )
                 })}
             </div>
-            <div className={`sidbar-left-item br position-relative ${pageSlug === '/calculate' ? 'active' : ''}`}>
+            {/*<div className={`sidbar-left-item br position-relative ${pageSlug === '/calculate' ? 'active' : ''}`}>
                 <Link to="/calculate" className="fake-link-block"></Link>
                 Рассчитать стоимость доставки
-            </div>
+            </div>*/}
         </div>
     )
 }
