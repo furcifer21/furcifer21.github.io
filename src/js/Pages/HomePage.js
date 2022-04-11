@@ -40,7 +40,7 @@ export const HomePage = (props) => {
 
         // убрать после теста с бэком
         setPriceData(REAL_FAKE_DATA);
-    });
+    }, []);
 
     function sendForm() {
         const phoneVal = topPhone.trim();
@@ -185,44 +185,44 @@ export const HomePage = (props) => {
                                                      aria-labelledby={`tab${index}-tab`}
                                                 >
                                                     {categoryTab.categories.length > 0 &&
-                                                    categoryTab.categories.map((subCategory, y) => {
-                                                        return (
-                                                            <div key={`subCategory-${index}-${y}`}>
-                                                                <div className="price-top br">{subCategory.category}</div>
-                                                                <table className={`table ${categoryTab.categories.length > 1 ? 'table-lg' : ''}`}>
-                                                                    <thead className="br">
-                                                                    <tr>
-                                                                        <th scope="col">Марка/Класс</th>
-                                                                        <th scope="col">Наименование</th>
-                                                                        <th scope="col">Цена с НДС</th>
-                                                                        <th scope="col">Количество кубов</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    {subCategory.products.map((product, i) => {
-                                                                        return (
-                                                                            <tr key={`product-${i}`}>
-                                                                                <th className="flex" scope="row"><span>{product.mark}</span><span> {product.class}</span></th>
-                                                                                <td className="position-relative">
-                                                                                    <Link to={`/product/${product.slug}`} className="fake-link-block"></Link>
-                                                                                    {product.name}
-                                                                                </td>
-                                                                                <td>{product.price} ₽</td>
-                                                                                <td className="no-br">
-                                                                                    <div className="number" data-step="1" data-min="1" data-max="100">
-                                                                                        <a href="#" className="number-minus">−</a>
-                                                                                        <input className="number-text" type="text" name="count" value="0" readOnly/>
-                                                                                        <a href="#" className="number-plus">+</a>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                        )
-                                                                    })}
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        )
-                                                    })
+                                                        categoryTab.categories.map((subCategory, y) => {
+                                                            return (
+                                                                <div key={`subCategory-${index}-${y}`}>
+                                                                    <div className="price-top br">{subCategory.category}</div>
+                                                                    <table className={`table ${categoryTab.categories.length > 1 ? 'table-lg' : ''}`}>
+                                                                        <thead className="br">
+                                                                        <tr>
+                                                                            <th scope="col">Марка/Класс</th>
+                                                                            <th scope="col">Наименование</th>
+                                                                            <th scope="col">Цена с НДС</th>
+                                                                            <th scope="col">Количество кубов</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        {subCategory.products.map((product, i) => {
+                                                                            return (
+                                                                                <tr key={`product-${i}`}>
+                                                                                    <th className="flex" scope="row"><span>{product.mark}</span><span> {product.class}</span></th>
+                                                                                    <td className="position-relative">
+                                                                                        <Link to={`/product/product-${product.id}`} className="fake-link-block"></Link>
+                                                                                        {product.name}
+                                                                                    </td>
+                                                                                    <td>{product.price} ₽</td>
+                                                                                    <td className="no-br">
+                                                                                        <div className="number" data-step="1" data-min="1" data-max="100">
+                                                                                            <a href="#" className="number-minus">−</a>
+                                                                                            <input className="number-text" type="text" name="count" value="0" readOnly/>
+                                                                                            <a href="#" className="number-plus">+</a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            )
+                                                                        })}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            )
+                                                        })
                                                     }
                                                     <button className="btn org cartblock-btn lgx position-relative">
                                                         <Link to="/catalog" className="fake-link-block"></Link>

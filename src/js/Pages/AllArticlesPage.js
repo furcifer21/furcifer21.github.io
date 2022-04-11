@@ -27,7 +27,7 @@ export const AllArticlesPage = (props) => {
 
     useEffect(() => {
         props.seoCallback({title: 'Каталог статей', description: 'Описание каталога'});
-    });
+    }, []);
 
     return (
         <>

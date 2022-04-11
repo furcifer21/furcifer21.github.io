@@ -5,7 +5,7 @@ export const CartPage = (props) => {
 
     useEffect(() => {
         props.seoCallback({title: 'Корзина', description: 'Описание каталога'});
-    });
+    }, []);
 
     return (
         <>

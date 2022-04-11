@@ -6,7 +6,7 @@ export const CheckoutPage = (props) => {
 
     useEffect(() => {
         props.seoCallback({title: 'Оформлние заказа', description: 'Описание каталога'});
-    });
+    }, []);
 
     return (
         <>

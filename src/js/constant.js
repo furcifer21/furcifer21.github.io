@@ -10,6 +10,7 @@ export const REAL_FAKE_DATA = [
                 "countProducts": 1,
                 "products": [
                     {
+                        "id": 1,
                         "name": "Бетон М100 B7,5 F100 W4 (Гравий)",
                         "price": 3300,
                         "contents": {
@@ -32,6 +33,7 @@ export const REAL_FAKE_DATA = [
                 "countProducts": 1,
                 "products": [
                     {
+                        "id": 2,
                         "name": "Бетон М200 B15 F150 W4 (Гравий)",
                         "price": 3500,
                         "contents": {
@@ -51,6 +53,7 @@ export const REAL_FAKE_DATA = [
         ],
         "products": [
             {
+                "id": 3,
                 "name": "Бетон М100 B7,5 F100 W4 (Гравий)",
                 "price": 3300,
                 "contents": {
@@ -66,6 +69,7 @@ export const REAL_FAKE_DATA = [
                 "description": ""
             },
             {
+                "id": 4,
                 "name": "Бетон М150 B12,5 F100 W4 (Гравий)",
                 "price": 3300,
                 "contents": {
@@ -81,6 +85,7 @@ export const REAL_FAKE_DATA = [
                 "description": ""
             },
             {
+                "id": 5,
                 "name": "Бетон М200 B15 F150 W4 (Гравий)",
                 "price": 3500,
                 "contents": {
@@ -109,6 +114,7 @@ export const REAL_FAKE_DATA = [
                 "countProducts": 1,
                 "products": [
                     {
+                        "id": 6,
                         "name": "А Бетон М100 B7,5 F100 W4 (Гравий)",
                         "price": 3300,
                         "contents": {
@@ -131,6 +137,7 @@ export const REAL_FAKE_DATA = [
                 "countProducts": 1,
                 "products": [
                     {
+                        "id": 7,
                         "name": "А Бетон М200 B15 F150 W4 (Гравий)",
                         "price": 3500,
                         "contents": {
@@ -150,6 +157,7 @@ export const REAL_FAKE_DATA = [
         ],
         "products": [
             {
+                "id": 8,
                 "name": "А Бетон М100 B7,5 F100 W4 (Гравий)",
                 "price": 3300,
                 "contents": {
@@ -165,6 +173,7 @@ export const REAL_FAKE_DATA = [
                 "description": ""
             },
             {
+                "id": 9,
                 "name": "А Бетон М200 B15 F150 W4 (Гравий)",
                 "price": 3500,
                 "contents": {

@@ -13,7 +13,7 @@ export const OneArticlePage = (props) => {
 
     useEffect(() => {
         props.seoCallback({title: 'Статья', description: 'Описание каталога'});
-    });
+    }, []);
 
     function sendForm() {
         const formData = {

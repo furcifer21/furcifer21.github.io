@@ -25,7 +25,7 @@ export const  AllArticlesCategoriesPage = (props) => {
     // dispatch(getProductCategories())
         dispatch(getAllProducts());
         props.seoCallback({title: 'Категории статей', description: 'Описание каталога'});
-    });
+    }, []);
 
     return (
         <>

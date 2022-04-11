@@ -6,8 +6,8 @@ export const ProductItem = ({item}) => {
     return (
         <div className="product_item">
             <div className="product_img">
-                <Link to={`/product/${item.link}`}>
-                    <img src="/images/product/1.png" alt="product img" />
+                <Link to={`/product/product-${item.id}`}>
+                    <img src={item.urlIMG} alt="product img" />
                 </Link>
                 {/*<div className="top_img">
                     <div className="prod_label new"></div>
@@ -23,7 +23,7 @@ export const ProductItem = ({item}) => {
                     Товарный бетон
                 </div>
                 <div className="tittle_product position-relative mb-2">
-                    <Link to={`/product/${item.link}`} className="fake-link-block"></Link>
+                    <Link to={`/product/product-${item.id}`} className="fake-link-block"></Link>
                     {item.name}
                 </div>
                 <div className="prod_row">

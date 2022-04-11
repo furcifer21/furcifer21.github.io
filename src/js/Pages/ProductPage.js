@@ -3,33 +3,52 @@ import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
 import {REAL_FAKE_DATA} from "../constant";
 import {CategoryMenu} from "../Components/CategoryMenu";
-import {articles} from "../../articlesHTMLText";
 
 export const ProductPage = (props) => {
     const location = useLocation();
     const [categoryMenu, setCategoryMenu] = useState('');
-    const [categoryData, setCategoryData] = useState('');
     const [productData, setProductData] = useState('');
+    const fakeProductData = [
+        {
+            "id": 1,
+            "name": "Бетон М100 B7,5 F100 W4 (Гравий)",
+            "price": 3300,
+            "contents": {
+                "Наполнитель": "Гравий",
+                "Подвижность": "П4",
+                "Класс бетона": "В7,5",
+                "Плотность (кг/м^3)": "2265",
+                "Морозостойкость, F": "F100",
+                "Средняя прочность": "125",
+                "Водонепроницаемость": "W4"
+            },
+            "urlIMG": "https://imgur.com/6vlKMyZ",
+            "description": ""
+        }
+    ]
 
     useEffect(() => {
         props.seoCallback({title: 'Товар', description: 'Описание каталога'});
 
         /*axios.get(`/product/getAllProducts`)
             .then(res => {
-                setCategoryData(res.data)
+                setCategoryMenu(res.data)
+            })
+            .catch(error => {
+                console.log(error);
+            });*/
+
+        /*axios.get(`/product/getProductById${location.pathname.split('-')[1]}`)
+            .then(res => {
                 setProductData(res.data)
             })
             .catch(error => {
                 console.log(error);
             });*/
 
+        setProductData(fakeProductData[0])
         setCategoryMenu(REAL_FAKE_DATA);
-        REAL_FAKE_DATA.map((category, index) => {
-            if(category.typeSlug === 1) {
-
-            }
-        });
-    });
+    }, []);
 
     return (
         productData !== '' &&
@@ -147,15 +166,13 @@ export const ProductPage = (props) => {
                                         <div className="tab-pane fade show active" id="tab1" role="tabpanel"
                                              aria-labelledby="tab1-tab">
                                             <div className="feature">
-                                                {productData.content.length > 0 &&
-                                                    Object.entries(productData.content).map(([key, value], index) => {
-                                                        return (
-                                                            <div key={`feature-${index}`} className="feature_row">
-                                                                <span>{key}</span><span> {value}</span>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
+                                                {Object.entries(productData.contents).map(([key, value], index) => {
+                                                    return (
+                                                        <div key={`feature-${index}`} className="feature_row">
+                                                            <span>{key}</span><span> {value}</span>
+                                                        </div>
+                                                    )
+                                                })}
                                             </div>
                                             <div dangerouslySetInnerHTML={{__html: productData.description}}></div>
                                         </div>

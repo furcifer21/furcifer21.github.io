@@ -17,7 +17,7 @@ export const CatalogPage = (props) => {
             .catch(error => {
                 console.log(error);
             });*/
-    });
+    }, []);
 
     return (
         catalogCategories.length > 0 &&
