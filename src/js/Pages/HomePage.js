@@ -387,7 +387,7 @@ export const HomePage = (props) => {
                     </div>
                 </div>
             </section>
-            <section id="articles" className="bg-wh">
+            {/*<section id="articles" className="bg-wh">
                 <div className="container">
                     <div className="row">
                         <h2>Актульные статьи</h2>
@@ -400,7 +400,7 @@ export const HomePage = (props) => {
                                     <div>
                                         <img src={article.img} className="img-article" alt={article.name}/>
                                         <div className="article-footer">
-                                            {/*<div className="article-t">Классы бетона</div>*/}
+                                            <div className="article-t">Классы бетона</div>
                                             <button className="btn org position-relative">
                                                 <Link to={`/articles/${article.slug}`} className="fake-link-block"></Link>
                                                 Читать полностью
@@ -412,7 +412,7 @@ export const HomePage = (props) => {
                         })}
                     </div>
                 </div>
-            </section>
+            </section>*/}
             <section id="partners" className="bg-wh">
                 <div className="container">
                     <div className="row">
