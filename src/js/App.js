@@ -38,9 +38,9 @@ function App() {
           {/*<Route exact path="/articles-categories" element={<AllArticlesCategoriesPage seoCallback={setSeo}/>}/>*/}
           <Route exact path="/articles" element={<AllArticlesPage seoCallback={setSeo}/>}/>
           <Route exact path="/articles/:slugArticle" element={<OneArticlePage seoCallback={setSeo}/>}/>
-          <Route exact path="/calculate" element={<CalculatedPage seoCallback={setSeo}/>}/>
+          {/*<Route exact path="/calculate" element={<CalculatedPage seoCallback={setSeo}/>}/>
           <Route exact path="/checkout" element={<CheckoutPage seoCallback={setSeo}/>}/>
-          <Route exact path="/cart" element={<CartPage seoCallback={setSeo}/>}/>
+          <Route exact path="/cart" element={<CartPage seoCallback={setSeo}/>}/>*/}
         </Routes>
         <OnClickModal/>
         <SuccessModal/>

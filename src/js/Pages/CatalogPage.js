@@ -1,8 +1,7 @@
 import {useEffect, useState} from "react"
-import { useDispatch } from "react-redux"
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {FAKE_PRODUCT_DATA_MAIN, REAL_FAKE_DATA} from "../constant";
+import {REAL_FAKE_DATA} from "../constant";
 
 export const CatalogPage = (props) => {
     // значение по  умолчанию [] - пустой массив
@@ -11,7 +10,7 @@ export const CatalogPage = (props) => {
     useEffect(() => {
         props.seoCallback({title: 'Каталог', description: 'Описание каталога'});
 
-        /*axios.get(`${апи_урл/getAllProducts}`)
+        /*axios.get(`/product/getAllProducts`)
             .then(res => {
                 setCatalogCategories(res.data)
             })
@@ -21,6 +20,7 @@ export const CatalogPage = (props) => {
     });
 
     return (
+        catalogCategories.length > 0 &&
         <>
             <section>
                 <div className="container breadcrumb">

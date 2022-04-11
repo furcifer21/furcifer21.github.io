@@ -1,10 +1,10 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
-import {FAKE_PRODUCT_DATA} from "../constant";
+import {REAL_FAKE_DATA} from "../constant";
 import {CategoryMenu} from "../Components/CategoryMenu";
 
 export const CalculatedPage = () => {
-    const [categoryData, setCategoryData] = useState(FAKE_PRODUCT_DATA);
+    const [categoryData, setCategoryData] = useState(REAL_FAKE_DATA);
 
     return (
         <>

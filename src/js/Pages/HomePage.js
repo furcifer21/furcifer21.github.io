@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {Map, Placemark, YMaps} from "react-yandex-maps";
-import {FAKE_PRODUCT_DATA_MAIN, REAL_FAKE_DATA} from "../constant";
+import {REAL_FAKE_DATA} from "../constant";
 import axios from "axios";
 import $ from "jquery";
 import InputMask from "react-input-mask";
@@ -9,7 +9,7 @@ import {checkPhone, validateNumber} from "../helper";
 
 export const HomePage = (props) => {
     // значение по  умолчанию [] - пустой массив
-    const [priceData, setPriceData] = useState(REAL_FAKE_DATA);
+    const [priceData, setPriceData] = useState([]);
     const [currentCategory, setCurrentCategory] = useState('');
     const [topName, setTopName] = useState('')
     const [topPhone, setTopPhone] = useState('')
@@ -30,16 +30,16 @@ export const HomePage = (props) => {
         props.seoCallback({title: 'Главная', description: 'Описание главной'});
 
         // заглушка. получение данных по товарам для раздела "актуальный прайс"
-        /*axios.get(`${апи_урл}`)
+        /*axios.get(`/product/getAllProducts`)
             .then(res => {
-                console.log('таблица товаров на главной', res)
-                // полученный массив с данным ложим в стейт, который дальше мапится и все красиво
-                // сейчас в стейте лежат псевдо данные, при раскоменчивании их нужно убрать, оставив пустой массив
                 setPriceData(res.data)
             })
             .catch(error => {
                 console.log(error);
             });*/
+
+        // убрать после теста с бэком
+        setPriceData(REAL_FAKE_DATA);
     });
 
     function sendForm() {
@@ -151,130 +151,132 @@ export const HomePage = (props) => {
                     </div>
                 </div>
             </section>
-            <section id="price">
-                <h2 className="center cover-bg blk">Актуальный прайс на продукцию ГСК</h2>
-                <div className="container-fluid">
-                    <div className="row tabel-block">
-                        <div className="col-tab price">
-                            <div className="price-tabel-block">
-                                <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                    {priceData.map((category, index) => {
-                                        currentCategory === '' && setCurrentCategory(category.typeSlug);
+            {priceData.length > 0 &&
+                <section id="price">
+                    <h2 className="center cover-bg blk">Актуальный прайс на продукцию ГСК</h2>
+                    <div className="container-fluid">
+                        <div className="row tabel-block">
+                            <div className="col-tab price">
+                                <div className="price-tabel-block">
+                                    <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                        {priceData.map((category, index) => {
+                                            currentCategory === '' && setCurrentCategory(category.typeSlug);
 
-                                        return (
-                                            <li key={`category-${index}`} className="nav-item" role="presentation">
-                                                <button className={`nav-link ${currentCategory === category.typeSlug ? 'active' : ''} br`} id={`tab${index}-tab`} data-toggle="tab"
-                                                        data-target={`#tab${index}`} type="button" role="tab" aria-controls={`tab${index}`}
-                                                        aria-selected="true"
-                                                        onClick={() => setCurrentCategory(category.typeSlug)}
+                                            return (
+                                                <li key={`category-${index}`} className="nav-item" role="presentation">
+                                                    <button className={`nav-link ${currentCategory === category.typeSlug ? 'active' : ''} br`} id={`tab${index}-tab`} data-toggle="tab"
+                                                            data-target={`#tab${index}`} type="button" role="tab" aria-controls={`tab${index}`}
+                                                            aria-selected="true"
+                                                            onClick={() => setCurrentCategory(category.typeSlug)}
+                                                    >
+                                                        {category.type}
+                                                    </button>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                    <div className="tab-content" id="myTabContent">
+                                        {priceData.map((categoryTab, index) => {
+                                            return (
+                                                <div key={`category-tab-${index}`}
+                                                     className={`tab-pane fade ${currentCategory === categoryTab.typeSlug ? 'show active' : ''}`}
+                                                     id={`tab${index}`}
+                                                     role="tabpanel"
+                                                     aria-labelledby={`tab${index}-tab`}
                                                 >
-                                                    {category.type}
-                                                </button>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                                <div className="tab-content" id="myTabContent">
-                                    {priceData.map((categoryTab, index) => {
-                                        return (
-                                            <div key={`category-tab-${index}`}
-                                                 className={`tab-pane fade ${currentCategory === categoryTab.typeSlug ? 'show active' : ''}`}
-                                                 id={`tab${index}`}
-                                                 role="tabpanel"
-                                                 aria-labelledby={`tab${index}-tab`}
-                                            >
-                                                {categoryTab.categories.length > 0 &&
+                                                    {categoryTab.categories.length > 0 &&
                                                     categoryTab.categories.map((subCategory, y) => {
                                                         return (
                                                             <div key={`subCategory-${index}-${y}`}>
                                                                 <div className="price-top br">{subCategory.category}</div>
                                                                 <table className={`table ${categoryTab.categories.length > 1 ? 'table-lg' : ''}`}>
                                                                     <thead className="br">
-                                                                        <tr>
-                                                                            <th scope="col">Марка/Класс</th>
-                                                                            <th scope="col">Наименование</th>
-                                                                            <th scope="col">Цена с НДС</th>
-                                                                            <th scope="col">Количество кубов</th>
-                                                                        </tr>
+                                                                    <tr>
+                                                                        <th scope="col">Марка/Класс</th>
+                                                                        <th scope="col">Наименование</th>
+                                                                        <th scope="col">Цена с НДС</th>
+                                                                        <th scope="col">Количество кубов</th>
+                                                                    </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {subCategory.products.map((product, i) => {
-                                                                            return (
-                                                                                <tr key={`product-${i}`}>
-                                                                                    <th className="flex" scope="row"><span>{product.mark}</span><span> {product.class}</span></th>
-                                                                                    <td className="position-relative">
-                                                                                        <Link to={`/product/${product.slug}`} className="fake-link-block"></Link>
-                                                                                        {product.name}
-                                                                                    </td>
-                                                                                    <td>{product.price} ₽</td>
-                                                                                    <td className="no-br">
-                                                                                        <div className="number" data-step="1" data-min="1" data-max="100">
-                                                                                            <a href="#" className="number-minus">−</a>
-                                                                                            <input className="number-text" type="text" name="count" value="0" readOnly/>
-                                                                                            <a href="#" className="number-plus">+</a>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            )
-                                                                        })}
+                                                                    {subCategory.products.map((product, i) => {
+                                                                        return (
+                                                                            <tr key={`product-${i}`}>
+                                                                                <th className="flex" scope="row"><span>{product.mark}</span><span> {product.class}</span></th>
+                                                                                <td className="position-relative">
+                                                                                    <Link to={`/product/${product.slug}`} className="fake-link-block"></Link>
+                                                                                    {product.name}
+                                                                                </td>
+                                                                                <td>{product.price} ₽</td>
+                                                                                <td className="no-br">
+                                                                                    <div className="number" data-step="1" data-min="1" data-max="100">
+                                                                                        <a href="#" className="number-minus">−</a>
+                                                                                        <input className="number-text" type="text" name="count" value="0" readOnly/>
+                                                                                        <a href="#" className="number-plus">+</a>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        )
+                                                                    })}
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         )
                                                     })
-                                                }
-                                                <button className="btn org cartblock-btn lgx position-relative">
-                                                    <Link to="/catalog" className="fake-link-block"></Link>
-                                                    Смотреть весь список
-                                                </button>
-                                            </div>
-                                        )
-                                    })}
+                                                    }
+                                                    <button className="btn org cartblock-btn lgx position-relative">
+                                                        <Link to="/catalog" className="fake-link-block"></Link>
+                                                        Смотреть весь список
+                                                    </button>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div className="left-cartblock br">
-                                    <div className="cartblock-body">
-                                        <div className="cartblock-top">
-                                            Ваш заказ
-                                        </div>
-                                        <form>
-                                            <div className="cartblock-item">Общий объём
-                                                <input type="text" className="br" value="0 m3" readOnly/>
-                                                <div>
-                                                    <div className="cartblock-item">Стоимость
-                                                        <input type="text" className="br lg" value="0 ₽" readOnly/>
-                                                        <div>
-                                                            <div className="cartblock-footer">
-                                                                <div>
-                                                                    <button className="btn org cartblock-btn lg position-relative">
-                                                                        <Link to="/cart" className="fake-link-block"></Link>
-                                                                        В  корзину
+                                <div>
+                                    <div className="left-cartblock br">
+                                        <div className="cartblock-body">
+                                            <div className="cartblock-top">
+                                                Ваш заказ
+                                            </div>
+                                            <form>
+                                                <div className="cartblock-item">Общий объём
+                                                    <input type="text" className="br" value="0 m3" readOnly/>
+                                                    <div>
+                                                        <div className="cartblock-item">Стоимость
+                                                            <input type="text" className="br lg" value="0 ₽" readOnly/>
+                                                            <div>
+                                                                <div className="cartblock-footer">
+                                                                    <div>
+                                                                        <button className="btn org cartblock-btn lg position-relative">
+                                                                            <Link to="/cart" className="fake-link-block"></Link>
+                                                                            В  корзину
+                                                                        </button>
+                                                                        <input type="reset" className="btn  cartblock-btn trash"/>
+                                                                    </div>
+                                                                    <button type="button" className="btn org cartblock-btn"
+                                                                            data-toggle="modal"
+                                                                            data-target="#modal">Оформить в один клик
                                                                     </button>
-                                                                    <input type="reset" className="btn  cartblock-btn trash"/>
+                                                                    <button className="btn grey cartblock-btn position-relative">
+                                                                        <Link to="/calculate" className="fake-link-block"></Link>
+                                                                        Рассчитать доставку
+                                                                    </button>
                                                                 </div>
-                                                                <button type="button" className="btn org cartblock-btn"
-                                                                        data-toggle="modal"
-                                                                        data-target="#modal">Оформить в один клик
-                                                                </button>
-                                                                <button className="btn grey cartblock-btn position-relative">
-                                                                    <Link to="/calculate" className="fake-link-block"></Link>
-                                                                    Рассчитать доставку
-                                                                </button>
                                                             </div>
-                                                        </div>
 
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            }
             {/*<section id="calk-banner" className="bg-wh">
                 <div className="container">
                     <div className="banner org br">
@@ -334,8 +336,10 @@ export const HomePage = (props) => {
             <section id="poraydok" className="bg-wh">
                 <div className="container">
                     <div className="row">
-                        <h2 className="center">Порядок работы</h2>
-                        <div className="dscr center">Процесс реализации вашего заказа от начала и до конца.</div>
+                        <h2 className="center">Порядок работы
+                        </h2>
+                        <div className="dscr center">Процесс реализации вашего заказа от начала и до конца.
+                        </div>
                     </div>
 
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 justify-content-center">
@@ -344,51 +348,40 @@ export const HomePage = (props) => {
                                 <span className="pr-item-top">Заявка</span>
                                 <span className="pr-item-num">1</span>
                             </div>
-                            <div className="pr-item-text">
-                                Оставьте заявку любым <br/>удобным для вас способом –<br/> по
-                                e-mail, по телефону <br/>или закажите обратный<br/> звонок на сайте.
-                            </div>
+                            <div className="pr-item-text">Оставьте заявку любым <br/>удобным для вас способом –<br/> по
+                                e-mail, по телефону <br/>или закажите обратный<br/> звонок на сайте.</div>
                         </div>
                         <div className="pr-item">
                             <div className="pr-item-title active">
                                 <span className="pr-item-top">Расчёт</span>
                                 <span className="pr-item-num">2</span>
                             </div>
-                            <div className="pr-item-text">
-                                Наши специалисты<br/> рассчитают стоимость<br/> бетона и
-                                доставки, сделают<br/> счет или коммерческое<br/> предложение.
-                            </div>
+                            <div className="pr-item-text">Наши специалисты<br/> рассчитают стоимость<br/> бетона и
+                                доставки, сделают<br/> счет или коммерческое<br/> предложение.</div>
                         </div>
                         <div className="pr-item">
                             <div className="pr-item-title">
                                 <span className="pr-item-top">Оплата</span>
                                 <span className="pr-item-num">3</span>
                             </div>
-                            <div className="pr-item-text">
-                                Наличный и безналичный<br/> расчет.
-                                Предварительная<br/> оплата для юридических лиц.<br/> Скидки и особые условия<br/> для
-                                постоянных клиентов.
-                            </div>
+                            <div className="pr-item-text">Наличный и безналичный<br/> расчет. Предварительная<br/> оплата
+                                для юридических лиц.<br/> Скидки и особые условия<br/> для постоянных клиентов.</div>
                         </div>
                         <div className="pr-item">
                             <div className="pr-item-title">
                                 <span className="pr-item-top">Производство</span>
                                 <span className="pr-item-num">4</span>
                             </div>
-                            <div className="pr-item-text">
-                                Изготовление бетонной<br/> смеси или раствора<br/> на нашем
-                                РБУ, погрузка<br/> в автобетоносмеситель.<br/> Контрольный звонок<br/> от диспетчера.
-                            </div>
+                            <div className="pr-item-text">Изготовление бетонной<br/> смеси или раствора<br/> на нашем РБУ,
+                                погрузка<br/> в автобетоносмеситель.<br/> Контрольный звонок<br/> от диспетчера.</div>
                         </div>
                         <div className="pr-item">
                             <div className="pr-item-title">
                                 <span className="pr-item-top">Доставка и разгрузка</span>
                                 <span className="pr-item-num">5</span>
                             </div>
-                            <div className="pr-item-text">
-                                Доставка производится<br/> миксерами от 7 до 10
-                                м3.<br/> Дополнительные условия<br/> поставки обговариваются<br/> заранее.
-                            </div>
+                            <div className="pr-item-text">Доставка производится<br/> миксерами от 7 до 10
+                                м3.<br/> Дополнительные условия<br/> поставки обговариваются<br/> заранее.</div>
                         </div>
 
                     </div>

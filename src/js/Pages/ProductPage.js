@@ -1,30 +1,38 @@
 import {Link} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
-import {FAKE_PRODUCT_DATA} from "../constant";
+import {REAL_FAKE_DATA} from "../constant";
 import {CategoryMenu} from "../Components/CategoryMenu";
+import {articles} from "../../articlesHTMLText";
 
 export const ProductPage = (props) => {
     const location = useLocation();
-    const [categoryData, setCategoryData] = useState(FAKE_PRODUCT_DATA);
-    const [productData, setProductData] = useState(FAKE_PRODUCT_DATA);
+    const [categoryMenu, setCategoryMenu] = useState('');
+    const [categoryData, setCategoryData] = useState('');
+    const [productData, setProductData] = useState('');
 
     useEffect(() => {
         props.seoCallback({title: 'Товар', description: 'Описание каталога'});
 
-        // заглушка. получение данных по товарам для раздела "актуальный прайс"
-        /*axios.get(`${апи_урл/product/product1}`)
+        /*axios.get(`/product/getAllProducts`)
             .then(res => {
-                // полученный массив с данным ложим в стейт, который дальше мапится и все красиво
-                // сейчас в стейте лежат псевдо данные, при раскоменчивании их нужно убрать, оставив пустой массив
+                setCategoryData(res.data)
                 setProductData(res.data)
             })
             .catch(error => {
                 console.log(error);
             });*/
-    }, [location.pathname]);
+
+        setCategoryMenu(REAL_FAKE_DATA);
+        REAL_FAKE_DATA.map((category, index) => {
+            if(category.typeSlug === 1) {
+
+            }
+        });
+    });
 
     return (
+        productData !== '' &&
         <>
             <section>
                 <div className="container breadcrumb">
@@ -50,7 +58,7 @@ export const ProductPage = (props) => {
                 <div className="container">
                     <div className="row name-row">
                         <div className="name-row-item">
-                            <h1>Бетон М100 В7,5 F100 W4 (Гравий) </h1>
+                            <h1>{productData.name} </h1>
                             {/*<div className="rating-mini">
                                 <span className="active"></span>
                                 <span className="active"></span>
@@ -69,33 +77,31 @@ export const ProductPage = (props) => {
             <section className="catalog-body">
                 <div className="container">
                     <div className="row justify-content-between">
-                        <CategoryMenu categories={categoryData.allCategories} pageSlug={''}/>
+                        <CategoryMenu categories={categoryMenu} pageSlug={''}/>
                         <div className="col-content">
                             <div className="row catalog_produkt">
                                 <div>
                                     <div className="product_item-row br bg-wh">
-                                        <div className="product_item-row-name">Бетон М100 В7,5 F100 W4 (Гравий)</div>
-                                        <div className="product_item-row-price">3 310 ₽/м3</div>
+                                        <div className="product_item-row-name">{productData.name}</div>
+                                        <div className="product_item-row-price">{productData.price} ₽/м3</div>
                                         {/*<div className="number" data-step="1" data-min="1" data-max="100">
                                             <a href="#" className="number-minus">−</a><input className="number-text"
                                                                                              type="text" name="count"
                                                                                              value="0"/>
                                             <a href="#" className="number-plus">+</a>
                                         </div>*/}
-                                        <div className="price">3 310 ₽</div>
+                                        <div className="price">{productData.price} ₽</div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row prod-img row-cols-1 row-cols-sm-3 row-cols-md-3 ">
-                                <img src="..//images/product/beton.png" className="raboti-img" alt=""/>
-                                <img src="..//images/product/beton1.png" className="raboti-img" alt=""/>
-                                <img src="..//images/product/beton2.png" className="raboti-img" alt=""/>
+                                <img src={productData.urlIMG} className="raboti-img" alt=""/>
                             </div>
                             <div className="inf d-lg-none">
                                 <div className="cat">Товарный бетон</div>
-                                <div className="tittle_product">Бетон M100 B7,5 F100 W4 (Гравий)</div>
+                                <div className="tittle_product">{productData.name}</div>
                                 <div className="prod_row">
-                                    <div className="price">3 310 ₽<span>/м3</span></div>
+                                    <div className="price">{productData.price} ₽<span>/м3</span></div>
                                     {/*<div className="rating-mini">
                                         <span className="active"></span>
                                         <span className="active"></span>
@@ -141,29 +147,17 @@ export const ProductPage = (props) => {
                                         <div className="tab-pane fade show active" id="tab1" role="tabpanel"
                                              aria-labelledby="tab1-tab">
                                             <div className="feature">
-                                                <div className="feature_row"><span>Класс бетона</span><span> B7,5</span>
-                                                </div>
-                                                <div className="feature_row">
-                                                    <span>Средняя прочность, кгс/см²</span><span> 125</span></div>
-                                                <div className="feature_row">
-                                                    <span>Наполнитель</span><span> Гравий</span></div>
-                                                <div className="feature_row">
-                                                    <span>Морозостойкость, F</span><span> F100</span></div>
-                                                <div className="feature_row"><span>Подвижность</span><span> П1, П2, П3, П4, П5</span>
-                                                </div>
-                                                <div className="feature_row">
-                                                    <span>Водонепроницаемость</span><span> W4</span></div>
-                                                <div className="feature_row">
-                                                    <span>Плотность (кг/м³) </span><span> 2265</span></div>
+                                                {productData.content.length > 0 &&
+                                                    Object.entries(productData.content).map(([key, value], index) => {
+                                                        return (
+                                                            <div key={`feature-${index}`} className="feature_row">
+                                                                <span>{key}</span><span> {value}</span>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
                                             </div>
-                                            <p>
-                                                Мы предлагаем щебень согласно ГОСТ 8267-93 и 8269.0-97. Ниже перечислены
-                                                основные качественные характеристики, которые следует учитывать при
-                                                выборе щебня:</p>
-                                            <p>
-                                                Фракционный состав. По размеру зерна различают мелкий щебень (5-20 мм),
-                                                средний (20-60 мм) и крупный (70-150 мм). Щебень размером до 300 мм
-                                                называется камень бутовый (или бут).</p>
+                                            <div dangerouslySetInnerHTML={{__html: productData.description}}></div>
                                         </div>
                                         <div className="tab-pane fade show " id="tab2" role="tabpanel"
                                              aria-labelledby="tab2-tab">

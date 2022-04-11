@@ -1,40 +1,74 @@
 import {useEffect, useState} from "react"
 import { ProductItem } from "../Components/ProductItem"
-import {FAKE_PRODUCT_DATA} from "../constant";
+import {REAL_FAKE_DATA} from "../constant";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 import {CategoryMenu} from "../Components/CategoryMenu";
+import axios from "axios";
 
 export const CategoryPage = (props) => {
     const location = useLocation();
-    // значение по  умолчанию [] - пустой массив
-    const [categoryData, setCategoryData] = useState(FAKE_PRODUCT_DATA);
-    const [categoryMenu, setCategoryMenu] = useState(FAKE_PRODUCT_DATA.allCategories);
-    const [subCategoryMenu, setSubCategoryMenu] = useState(FAKE_PRODUCT_DATA.subCategories);
-    const [productsData, setProductsData] = useState(FAKE_PRODUCT_DATA.products);
-    const categorySlug = props.subSlug ? location.pathname.split('/')[2] : location.pathname.split('/')[2]
+    const [categoryData, setCategoryData] = useState('');
+    const [categoryMenu, setCategoryMenu] = useState('');
+    const [subCategoryMenu, setSubCategoryMenu] = useState([]);
+    const [subCategoryName, setSubCategoryName] = useState('');
+    const [productsData, setProductsData] = useState([]);
+    const isSubCategoryPage = props.subSlug;
+    const categorySlug = isSubCategoryPage ? location.pathname.split('/')[2] : location.pathname.split('/')[2]
 
     useEffect(() => {
         props.seoCallback({title: 'Категория товаров', description: 'Описание каталога'});
 
-       /* setCategoryData()
-        setCategoryMenu()
-        setSubCategoryMenu()
-        setProductsData()*/
-
-        // заглушка. получение данных по товарам для раздела "актуальный прайс"
-        /*axios.get(`${апи_урл/catalog/}`)
+        /*axios.get(`/product/getAllProducts`)
             .then(res => {
-                // полученный массив с данным ложим в стейт, который дальше мапится и все красиво
-                // сейчас в стейте лежат псевдо данные, при раскоменчивании их нужно убрать, оставив пустой массив
-                setCategoryData(res.data)
+                const response = res.data;
+
+                setCategoryMenu(response);
+                response.map(category => {
+                    if(category.typeSlug === categorySlug) {
+                        setCategoryData(category);
+                        setSubCategoryMenu(category.categories);
+
+                        if(isSubCategoryPage) {
+                            category.categories.map((subCategory, index) => {
+                                if(encodeURI(subCategory.categorySlug) === location.pathname.split('/').pop()) {
+                                    setProductsData(subCategory.products);
+                                    setSubCategoryName(subCategory.category);
+                                }
+                            })
+                        } else {
+                            setProductsData(category.products);
+                        }
+                    }
+                });
             })
             .catch(error => {
                 console.log(error);
             });*/
-    }, [location.pathname]);
+
+        // убрать после теста с бэком
+        setCategoryMenu(REAL_FAKE_DATA);
+        REAL_FAKE_DATA.map((category, index) => {
+            if(category.typeSlug === categorySlug) {
+                setCategoryData(category);
+                setSubCategoryMenu(category.categories);
+
+                if(isSubCategoryPage) {
+                    category.categories.map((subCategory, index) => {
+                        if(encodeURI(subCategory.categorySlug) === location.pathname.split('/').pop()) {
+                            setProductsData(subCategory.products);
+                            setSubCategoryName(subCategory.category);
+                        }
+                    })
+                } else {
+                    setProductsData(category.products)
+                }
+            }
+        });
+    });
 
     return (
+        categoryData !== '' &&
         <>
             <section>
                 <div className="container breadcrumb">
@@ -45,9 +79,11 @@ export const CategoryPage = (props) => {
                                     <Link to="/catalog">Каталог</Link>
                                 </li>
                                 <li className="breadcrumb-item">
-                                    <Link to={`/catalog/${categorySlug}`}>Товарный бетон</Link>
+                                    <Link to={`/catalog/${categorySlug}`}>{categoryData.type}</Link>
                                 </li>
-                                <li className="breadcrumb-item active" aria-current="page">Бетон на гравийном щебне</li>
+                                {isSubCategoryPage &&
+                                    <li className="breadcrumb-item active" aria-current="page">{subCategoryName}</li>
+                                }
                             </ol>
                         </nav>
                     </div>
@@ -55,7 +91,7 @@ export const CategoryPage = (props) => {
                 <div className="container">
                     <div className="row name-row">
                         <div className="name-row-item">
-                            <h1>{categoryData.name} <span className="num">({categoryData.products.length})</span></h1>
+                            <h1>{categoryData.type} <span className="num">({categoryData.products.length})</span></h1>
                         </div>
                     </div>
                     <hr/>
@@ -63,9 +99,9 @@ export const CategoryPage = (props) => {
                         {subCategoryMenu.length > 0 &&
                             subCategoryMenu.map((sub, index) => {
                                 return (
-                                    <div key={`subcategory-${index}`} className={`category-row-item br r position-relative ${location.pathname === `/catalog/${categorySlug}/${sub.slug}` ? 'active' : ''}`}>
-                                        <Link to={`/catalog/${categorySlug}/${sub.slug}`} className="fake-link-block"></Link>
-                                        {sub.name}<span>100 товаров</span>
+                                    <div key={`subcategory-${index}`} className={`category-row-item br r position-relative ${location.pathname === encodeURI(`/catalog/${categorySlug}/${sub.categorySlug}`) ? 'active' : ''}`}>
+                                        <Link to={`/catalog/${categorySlug}/${sub.categorySlug}`} className="fake-link-block"></Link>
+                                        {sub.category}<span>товаров: {sub.products.length}</span>
                                     </div>
                                 )
                             })
@@ -77,7 +113,7 @@ export const CategoryPage = (props) => {
             <section className="catalog-body">
                 <div className="container">
                     <div className="row justify-content-between">
-                        <CategoryMenu categories={categoryMenu} pageSlug={props.subSlug ? location.pathname.split('/')[2] : location.pathname.split('/')[2]}/>
+                        <CategoryMenu categories={categoryMenu} pageSlug={isSubCategoryPage ? location.pathname.split('/')[2] : location.pathname.split('/')[2]}/>
                         <div className="col-content">
                             {/*<div className="content-filtr"><img src={union} alt=""/>По умолчанию <span>(возрастание)<img
                                 src={polygon} alt=""/></span>

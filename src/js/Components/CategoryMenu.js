@@ -8,9 +8,9 @@ export const CategoryMenu = ({categories, pageSlug}) => {
             <div>
                 {categories.map((category, index) => {
                     return (
-                        <div key={`category-item-${index}`} className={`sidbar-left-item br w-100 position-relative ${pageSlug === category.slug ? 'active' : ''}`}>
-                            <Link to={`/catalog/${category.slug}`} className="fake-link-block"></Link>
-                            {category.name}
+                        <div key={`category-item-${index}`} className={`sidbar-left-item br w-100 position-relative ${pageSlug === category.typeSlug ? 'active' : ''}`}>
+                            <Link to={`/catalog/${category.typeSlug}`} className="fake-link-block"></Link>
+                            {category.type}
                         </div>
                     )
                 })}

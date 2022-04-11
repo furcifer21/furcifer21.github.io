@@ -2738,6 +2738,12 @@ input[type="radio"]:checked+label:after {
     padding-right: 0;
 }
 
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1110px;
+    }
+}
+
 @media (max-width: 998px) {
     .zakaz-block.tip-p {max-width: 100%;}
     section.top {
