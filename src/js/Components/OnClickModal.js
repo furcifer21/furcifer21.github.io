@@ -12,11 +12,10 @@ export const OnClickModal = (props) => {
 
     function sendForm(e) {
         e.preventDefault();
-        const phoneVal = modalPhone.trim();
         const emailVal = modalEmail.trim();
         const formData = {
             name: modalName.trim(),
-            phone: phoneVal,
+            phone: modalPhone.trim(),
             email: emailVal,
         };
 
