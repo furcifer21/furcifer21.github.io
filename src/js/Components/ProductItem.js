@@ -18,10 +18,10 @@ export const ProductItem = ({item}) => {
                 </div>*/}
             </div>
             <div className="inf">
-                <div className="cat position-relative">
+                {/*<div className="cat position-relative">
                     <Link to={`/catalog/#`} className="fake-link-block"></Link>
                     Товарный бетон
-                </div>
+                </div>*/}
                 <div className="tittle_product position-relative mb-2">
                     <Link to={`/product/product-${item.id}`} className="fake-link-block"></Link>
                     {item.name}

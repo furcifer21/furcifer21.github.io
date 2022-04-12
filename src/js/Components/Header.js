@@ -69,7 +69,7 @@ export const Header = () => {
                         <a href="tel:+74993777770" className="header-phone d-flex align-items-center justify-content-center">
                             <img src="/images/icon/phone.svg" width="24" alt="phone"/>
                         </a>
-                        <a href="tel:+74993777770" className="d-none d-lg-inline text-decoration-none" style={{color: "#18191F", marginLeft: "4px", fontWeight: 500}}>+7(499)3777770 </a>
+                        <a href="tel:+74993777770" className="d-none d-lg-inline text-decoration-none" style={{color: "#18191F", marginLeft: "4px", fontWeight: 500}}>+7(499)377-77-70 </a>
                         {/*<Link to="/cart" className="d-flex align-items-center basket">
                             <img className="" src={basket} alt=""/>
                         </Link>*/}

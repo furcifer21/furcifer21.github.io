@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
-import {REAL_FAKE_DATA} from "../constant";
+import {API_URL, REAL_FAKE_DATA} from "../constant";
 import {CategoryMenu} from "../Components/CategoryMenu";
 
 export const ProductPage = (props) => {
@@ -29,23 +29,24 @@ export const ProductPage = (props) => {
 
     useEffect(() => {
         props.seoCallback({title: 'Товар', description: 'Описание каталога'});
+        const productId = decodeURI(location.pathname.split('-')[1]);
 
-        /*axios.get(`/product/getAllProducts`)
+        /*axios.get(`${API_URL}/product/getAllProducts`)
             .then(res => {
                 setCategoryMenu(res.data)
             })
             .catch(error => {
                 console.log(error);
-            });*/
+            });
 
-        /*axios.get(`/product/getProductById${location.pathname.split('-')[1]}`)
+        axios.get(`${API_URL}/product/getProductById${productId}`)
             .then(res => {
                 setProductData(res.data)
             })
             .catch(error => {
                 console.log(error);
-            });*/
-
+            });
+*/
         setProductData(fakeProductData[0])
         setCategoryMenu(REAL_FAKE_DATA);
     }, []);
@@ -61,15 +62,7 @@ export const ProductPage = (props) => {
                                 <li className="breadcrumb-item">
                                     <Link to="/catalog">Каталог</Link>
                                 </li>
-                                <li className="breadcrumb-item">
-                                    <Link to="/catalog/catalogCategory1">Товарный бетон</Link>
-                                </li>
-                                <li className="breadcrumb-item">
-                                    <Link to="/catalog/catalogCategory1">Бетон на гравийном щебне</Link>
-                                </li>
-                                <li className="breadcrumb-item active" aria-current="page">Бетон М100 В7,5 F100 W4
-                                    (Гравий)
-                                </li>
+                                <li className="breadcrumb-item active" aria-current="page">{productData.name}</li>
                             </ol>
                         </nav>
                     </div>
@@ -77,7 +70,7 @@ export const ProductPage = (props) => {
                 <div className="container">
                     <div className="row name-row">
                         <div className="name-row-item">
-                            <h1>{productData.name} </h1>
+                            <h1>{productData.name}</h1>
                             {/*<div className="rating-mini">
                                 <span className="active"></span>
                                 <span className="active"></span>
@@ -113,8 +106,8 @@ export const ProductPage = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row prod-img row-cols-1 row-cols-sm-3 row-cols-md-3 ">
-                                <img src={productData.urlIMG} className="raboti-img" alt=""/>
+                            <div className="prod-img text-center">
+                                <img src={productData.urlIMG} className="raboti-img" height="270" alt={productData.name}/>
                             </div>
                             <div className="inf d-lg-none">
                                 <div className="cat">Товарный бетон</div>
@@ -178,10 +171,11 @@ export const ProductPage = (props) => {
                                         </div>
                                         <div className="tab-pane fade show " id="tab2" role="tabpanel"
                                              aria-labelledby="tab2-tab">
-                                            <div className="dscr">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Condimentum diam orci pretium a pharetra, feugiat cursus. Dictumst
-                                                risus, sem egestas odio cras adipiscing vulputate. Nisi, risus in
-                                                suscipit non. Non commodo volutpat, pharetra, vel.
+                                            <div className="dscr">
+                                                <h4>Доставка в пределах МКАД</h4>
+                                                <p className="mb-4">Тарифы уточняйте у менеджера</p>
+                                                <h4>Доставка осуществляется круглосуточно и без выходных</h4>
+                                                <p>Дотсавка в более отдаленные районы просчитывается менеджером индивидуально. При заказе больших объемов будет скидка или бесплатная доставка.</p>
                                             </div>
                                         </div>
                                         <div className="tab-pane fade show " id="tab3" role="tabpanel"

@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import InputMask from "react-input-mask";
 import $ from "jquery";
 import axios from "axios";
+import {API_URL} from "../constant";
 
 export const OnClickModal = (props) => {
     const [modalName, setModalName] = useState('');
@@ -9,7 +10,8 @@ export const OnClickModal = (props) => {
     const [modalEmail, setModalEmail] = useState('');
     const [agreeCheckbox, setAgreeCheckbox] = useState(true);
 
-    function sendForm() {
+    function sendForm(e) {
+        e.preventDefault();
         const phoneVal = modalPhone.trim();
         const emailVal = modalEmail.trim();
         const formData = {
@@ -19,17 +21,14 @@ export const OnClickModal = (props) => {
         };
 
         if(agreeCheckbox && (emailVal !== '')) {
-            $('#modal').modal('hide');
-            $('#success-modal').modal('show');
-
-            /*axios.post(`${апи_урл}`, formData)
+            axios.post(`${API_URL}`, formData)
                 .then(res => {
                      $('#modal').modal('hide');
                     $('#success-modal').modal('show');
                 })
                 .catch(error => {
                     console.log(error);
-                });*/
+                });
         }
     }
 
@@ -43,7 +42,7 @@ export const OnClickModal = (props) => {
                         время
                     </div>
                     <div className="form-wrapper w-form">
-                        <form className="form" action="" method="post" id="form-2">
+                        <form className="form" id="form-2" onSubmit={(e) => sendForm(e)}>
                             <input className="text-field w-input"
                                    data-name="Имя"
                                    name="name"
@@ -65,18 +64,20 @@ export const OnClickModal = (props) => {
                                    maxLength="256"
                                    placeholder="E-mail*"
                                    type="email"
+                                   required="required"
                                    value={modalEmail}
                                    onChange={(e) => setModalEmail(e.target.value)}
                             />
                             <input type="checkbox"
                                    id="cb1"
+                                   required="required"
                                    checked={agreeCheckbox}
                                    onChange={() => setAgreeCheckbox(!agreeCheckbox)}
                             />
                             <label htmlFor="cb1">
                                 Я согласен на <a href="#">обработку персональных данных</a>
                             </label>
-                            <button type="button" className="btn org  main-btn form-btn" onClick={sendForm}>Отправить</button>
+                            <button type="submit" className="btn org  main-btn form-btn">Отправить</button>
                         </form>
                     </div>
                 </div>

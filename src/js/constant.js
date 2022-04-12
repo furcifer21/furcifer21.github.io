@@ -1,3 +1,4 @@
+export const API_URL = 'https://localhost:8080'
 export const REAL_FAKE_DATA = [
     {
         "type": "Товарный бетон",
@@ -10,7 +11,7 @@ export const REAL_FAKE_DATA = [
                 "countProducts": 1,
                 "products": [
                     {
-                        "id": 1,
+                        "id": 20,
                         "name": "Бетон М100 B7,5 F100 W4 (Гравий)",
                         "price": 3300,
                         "contents": {

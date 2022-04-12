@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {Map, Placemark, YMaps} from "react-yandex-maps";
-import {REAL_FAKE_DATA} from "../constant";
+import {API_URL, REAL_FAKE_DATA} from "../constant";
 import axios from "axios";
 import $ from "jquery";
 import InputMask from "react-input-mask";
@@ -30,7 +30,7 @@ export const HomePage = (props) => {
         props.seoCallback({title: 'Главная', description: 'Описание главной'});
 
         // заглушка. получение данных по товарам для раздела "актуальный прайс"
-        /*axios.get(`/product/getAllProducts`)
+        /*axios.get(`${API_URL}/product/getAllProducts`)
             .then(res => {
                 setPriceData(res.data)
             })
@@ -42,7 +42,8 @@ export const HomePage = (props) => {
         setPriceData(REAL_FAKE_DATA);
     }, []);
 
-    function sendForm() {
+    function sendForm(e) {
+        e.preventDefault();
         const phoneVal = topPhone.trim();
         const formData = {
             name: topName.trim(),
@@ -50,15 +51,13 @@ export const HomePage = (props) => {
         };
 
         if(checkPhone(phoneVal) || (phoneVal !== '')) {
-            $('#success-modal').modal('show');
-
-            /*axios.post(`${апи_урл}`, formData)
+            axios.post(`${API_URL}`, formData)
                 .then(res => {
                     $('#success-modal').modal('show');
                 })
                 .catch(error => {
                     console.log(error);
-                });*/
+                });
         }
     }
 
@@ -124,7 +123,7 @@ export const HomePage = (props) => {
                         <div className="col">
                             <h2 className="center form-title wh">Хотите купить бетон?</h2>
                             <div className="dscr center wh">Оставьте свои контакты и наши специалисты свяжутся с вами.</div>
-                            <form className="form" action="" method="post" id="form-1">
+                            <form className="form" id="form-1" onSubmit={(e) => sendForm(e)}>
                                 <div className="row-form">
                                     <div>
                                         <input type="text"
@@ -141,9 +140,10 @@ export const HomePage = (props) => {
                                                    placeholder="Ваш телефон"
                                                    mask="+7 (999) 999-99-99"
                                                    value={topPhone}
+                                                   required="required"
                                                    onChange={(e) => setTopPhone(e.target.value)}
                                         />
-                                        <button type="button" className="btn blk form-btn" onClick={sendForm}>Заказать звонок</button>
+                                        <button type="submit" className="btn blk form-btn">Заказать звонок</button>
                                     </div>
                                 </div>
                             </form>
@@ -192,7 +192,7 @@ export const HomePage = (props) => {
                                                                     <table className={`table ${categoryTab.categories.length > 1 ? 'table-lg' : ''}`}>
                                                                         <thead className="br">
                                                                         <tr>
-                                                                            <th scope="col">Марка/Класс</th>
+                                                                            {/*<th scope="col">Марка/Класс</th>*/}
                                                                             <th scope="col">Наименование</th>
                                                                             <th scope="col">Цена с НДС</th>
                                                                             <th scope="col">Количество кубов</th>
@@ -202,7 +202,7 @@ export const HomePage = (props) => {
                                                                         {subCategory.products.map((product, i) => {
                                                                             return (
                                                                                 <tr key={`product-${i}`}>
-                                                                                    <th className="flex" scope="row"><span>{product.mark}</span><span> {product.class}</span></th>
+                                                                                    {/*<th className="flex" scope="row"><span>{product.mark}</span><span> {product.class}</span></th>*/}
                                                                                     <td className="position-relative">
                                                                                         <Link to={`/product/product-${product.id}`} className="fake-link-block"></Link>
                                                                                         {product.name}
@@ -418,7 +418,7 @@ export const HomePage = (props) => {
                     <div className="row">
                         <div className="col-md-4">
                             <div className="title-block">25+<span>Партнёры ГСК</span></div>
-                            <div className="dscr">Партнёров Главной Строительной компании.</div>
+                            <div className="dscr d-none d-md-block">Партнёров Главной Строительной компании.</div>
                         </div>
                         <div className="col-md-8">
                             <div className="row row-cols-partners">

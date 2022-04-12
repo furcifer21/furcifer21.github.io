@@ -58,7 +58,7 @@ export const CalculatedPage = () => {
                                     <div className="row-form col-2">
                                         <button type="submit" className="btn org  main-btn form-btn">Рассчитать</button>
                                         <span className="txt-calk"> Все рассчеты представлены в ознакомительных целях. Для точного рассчёта рекомендуем связаться с нашими специалистами по телефону <br/><a
-                                            href="tel:8 (495) 502 2030"><b>8 (495) 502 2030</b></a></span>
+                                            href="tel:+74993777770"><b>+7 (499) 377-77-70</b></a></span>
                                     </div>
                                 </form>
                                 <hr/>

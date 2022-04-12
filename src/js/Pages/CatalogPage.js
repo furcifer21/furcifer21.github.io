@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {REAL_FAKE_DATA} from "../constant";
+import {API_URL, REAL_FAKE_DATA} from "../constant";
 
 export const CatalogPage = (props) => {
     // значение по  умолчанию [] - пустой массив
@@ -10,7 +10,7 @@ export const CatalogPage = (props) => {
     useEffect(() => {
         props.seoCallback({title: 'Каталог', description: 'Описание каталога'});
 
-        /*axios.get(`/product/getAllProducts`)
+        /*axios.get(`${API_URL}/product/getAllProducts`)
             .then(res => {
                 setCatalogCategories(res.data)
             })

@@ -1023,6 +1023,13 @@ button.btn.in_cart {
 
 .product_img {
     position: relative;
+    height: 265px;
+}
+
+@media (max-width: 768px) {
+    .product_img {
+        height: 365px;
+    }
 }
 
 .product_img img {
@@ -1360,6 +1367,17 @@ p.card-text span {
     right: 0%;
 }
 
+@media (max-width: 1199px) {
+    .pr-item:after {
+        top: 15%;
+    }
+
+    .pr-item:nth-child(4)::after {
+        top: auto;
+        bottom: 50%;
+    }
+}
+
 .pr-item {
     padding: 35px;
     max-width: 301px;
@@ -1390,7 +1408,7 @@ span.pr-item-top {
 p.card-text {
     margin-bottom: 0;
     font-weight: 800;
-    font-size: 40px;
+    font-size: 32px;
     line-height: 64px;
 }
 
@@ -1895,8 +1913,11 @@ section#price {
 }
 
 section#kupit {
-    background: url("../../public/images/bg-top2.png") no-repeat 50%/cover;
-    padding: 160px 0 60px;
+    background: url(../../public/images/bg-top2.png) no-repeat 50%/cover;
+    padding: 180px 0 60px;
+    min-height: 500px;
+    display: flex;
+    align-items: flex-end;
 }
 
 section#card {
@@ -2660,7 +2681,7 @@ input[type="radio"]:checked+label:after {
     }
 
     p.card-text {
-        font-size: 40px;
+        font-size: 32px;
     }
 
     small.text-muted {
@@ -2756,11 +2777,12 @@ input[type="radio"]:checked+label:after {
     }
 
     section#kupit {
-        padding: 414px 0 60px;
+        padding: 500px 0 60px;
     }
 
     .card {
         min-height: 252px;
+        background-size: contain;
     }
 
     .left-cartblock {
@@ -3205,7 +3227,6 @@ input[type="radio"]:checked+label:after {
 
     .price-top {
         font-size: 16px;
-        display: none;
     }
 
     .left-cartblock {
@@ -3240,7 +3261,6 @@ input[type="radio"]:checked+label:after {
         margin-bottom: 20px;
     }
 
-    thead tr th:nth-child(1),
     th.flex {
         display: none;
     }
@@ -4300,8 +4320,8 @@ span.sr-only::after {
 }
 
 #card .row {
-    margin-left: calc(-1.5 * var(--bs-gutter-x));
-    margin-right: calc(-1.5 * var(--bs-gutter-x));
+    margin-left: calc(-1.0 * var(--bs-gutter-x));
+    margin-right: calc(-1.0 * var(--bs-gutter-x));
 }
 @media (min-width: 1500px){
     section#card {

@@ -3,6 +3,8 @@ import {useLocation} from "react-router";
 import {articles} from "../../articlesHTMLText";
 import {Link} from "react-router-dom";
 import $ from "jquery";
+import {API_URL} from "../constant";
+import axios from "axios";
 
 export const OneArticlePage = (props) => {
     const [nameInput, setNameInput] = useState('');
@@ -15,24 +17,22 @@ export const OneArticlePage = (props) => {
         props.seoCallback({title: 'Статья', description: 'Описание каталога'});
     }, []);
 
-    function sendForm() {
+    function sendForm(e) {
+        e.preventDefault();
         const formData = {
             name: nameInput.trim(),
             email: emailInput.trim(),
-            text: textInput.trim(),
+            question: textInput.trim(),
         }
 
         if(agreeCheckbox && (emailInput.trim() !== '')) {
-            $('#success-modal').modal('show');
-
-            /*axios.post(`${апи_урл}`, formData)
+           axios.post(`${API_URL}/sendQuestion`, formData)
                 .then(res => {
-                     $('#modal').modal('hide');
                     $('#success-modal').modal('show');
                 })
                 .catch(error => {
                     console.log(error);
-                });*/
+                });
         }
     }
 
@@ -82,7 +82,7 @@ export const OneArticlePage = (props) => {
                                     <div className="dscr ">Если вы не нашли ответ на свой вопрос на нашем сайте, то
                                         можете написать его нашим специалистам.
                                     </div>
-                                    <form className="form articles" action="" method="post" id="form-1">
+                                    <form className="form articles" id="form-1" onSubmit={(e) => sendForm(e)}>
                                         <div className="row-form">
                                             <input className="text-field w-input"
                                                    type="text"
@@ -106,13 +106,14 @@ export const OneArticlePage = (props) => {
                                         <div className="row-form">
                                             <input type="checkbox"
                                                    id="cb1"
+                                                   required="required"
                                                    checked={agreeCheckbox}
                                                    onChange={() => setAgreeCheckbox(!agreeCheckbox)}
                                             />
                                             <label htmlFor="cb1">
                                                 Я согласен на <a href="#">обработку персональных данных</a>
                                             </label>
-                                            <button type="button" className="btn org main-btn form-btn" onClick={sendForm}>
+                                            <button type="submit" className="btn org main-btn form-btn" >
                                                 Отправить письмо
                                             </button>
                                         </div>

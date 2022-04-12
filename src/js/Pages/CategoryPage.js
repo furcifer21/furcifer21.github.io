@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react"
 import { ProductItem } from "../Components/ProductItem"
-import {REAL_FAKE_DATA} from "../constant";
+import {API_URL, REAL_FAKE_DATA} from "../constant";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 import {CategoryMenu} from "../Components/CategoryMenu";
@@ -19,7 +19,7 @@ export const CategoryPage = (props) => {
     useEffect(() => {
         props.seoCallback({title: 'Категория товаров', description: 'Описание каталога'});
 
-        /*axios.get(`/product/getAllProducts`)
+        /*axios.get(`${API_URL}/product/getAllProducts`)
             .then(res => {
                 const response = res.data;
 
