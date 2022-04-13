@@ -9,7 +9,7 @@ import axios from "axios";
 export const CategoryPage = (props) => {
     const location = useLocation();
     const [categoryData, setCategoryData] = useState('');
-    const [categoryMenu, setCategoryMenu] = useState('');
+    const [categoryMenu, setCategoryMenu] = useState([]);
     const [subCategoryMenu, setSubCategoryMenu] = useState([]);
     const [subCategoryName, setSubCategoryName] = useState('');
     const [productsData, setProductsData] = useState([]);
