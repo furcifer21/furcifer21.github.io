@@ -19,7 +19,7 @@ export const CategoryPage = (props) => {
     useEffect(() => {
         props.seoCallback({title: 'Категория товаров', description: 'Описание каталога'});
 
-        axios.get(`${API_URL}/product/getAllProducts`)
+        axios.get(`${API_URL}/product/getAllProduct`)
             .then(res => {
                 const response = res.data;
 

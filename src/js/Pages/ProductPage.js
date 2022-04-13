@@ -32,7 +32,7 @@ export const ProductPage = (props) => {
         props.seoCallback({title: 'Товар', description: 'Описание каталога'});
         const productId = decodeURI(location.pathname.split('-')[1]);
 
-        axios.get(`${API_URL}/product/getAllProducts`)
+        axios.get(`${API_URL}/product/getAllProduct`)
             .then(res => {
                 setCategoryMenu(res.data)
             })

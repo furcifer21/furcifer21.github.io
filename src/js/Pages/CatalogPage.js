@@ -10,7 +10,7 @@ export const CatalogPage = (props) => {
     useEffect(() => {
         props.seoCallback({title: 'Каталог', description: 'Описание каталога'});
 
-        axios.get(`${API_URL}/product/getAllProducts`)
+        axios.get(`${API_URL}/product/getAllProduct`)
             .then(res => {
                 setCatalogCategories(res.data)
             })

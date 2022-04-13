@@ -29,7 +29,7 @@ export const HomePage = (props) => {
     useEffect(() => {
         props.seoCallback({title: 'Главная', description: 'Описание главной'});
 
-        axios.get(`${API_URL}/product/getAllProducts`)
+        axios.get(`${API_URL}/product/getAllProduct`)
             .then(res => {
                 setPriceData(res.data)
             })
