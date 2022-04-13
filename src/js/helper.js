@@ -11,3 +11,7 @@ export function checkPhone(phone) {
         return true;
     }
 }
+
+export function modalQuickOrderCall(productName, productAmount) {
+
+}

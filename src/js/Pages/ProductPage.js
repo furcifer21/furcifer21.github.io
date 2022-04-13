@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router";
 import {API_URL, REAL_FAKE_DATA} from "../constant";
 import {CategoryMenu} from "../Components/CategoryMenu";
+import axios from "axios";
 
 export const ProductPage = (props) => {
     const location = useLocation();
@@ -31,7 +32,7 @@ export const ProductPage = (props) => {
         props.seoCallback({title: 'Товар', description: 'Описание каталога'});
         const productId = decodeURI(location.pathname.split('-')[1]);
 
-        /*axios.get(`${API_URL}/product/getAllProducts`)
+        axios.get(`${API_URL}/product/getAllProducts`)
             .then(res => {
                 setCategoryMenu(res.data)
             })
@@ -46,9 +47,6 @@ export const ProductPage = (props) => {
             .catch(error => {
                 console.log(error);
             });
-*/
-        setProductData(fakeProductData[0])
-        setCategoryMenu(REAL_FAKE_DATA);
     }, []);
 
     return (

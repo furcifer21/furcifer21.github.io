@@ -3,13 +3,16 @@ import InputMask from "react-input-mask";
 import $ from "jquery";
 import axios from "axios";
 import {API_URL} from "../constant";
+import {shallowEqual, useSelector} from "react-redux";
 
 export const OnClickModal = (props) => {
     const [modalName, setModalName] = useState('');
     const [modalPhone, setModalPhone] = useState('');
     const [modalEmail, setModalEmail] = useState('');
     const [agreeCheckbox, setAgreeCheckbox] = useState(true);
+    const profilePhoneState = useSelector(state => console.log(6,state), shallowEqual);
 
+    console.log(123,profilePhoneState)
     function sendForm(e) {
         e.preventDefault();
         const emailVal = modalEmail.trim();
@@ -17,12 +20,13 @@ export const OnClickModal = (props) => {
             name: modalName.trim(),
             phone: modalPhone.trim(),
             email: emailVal,
+            products: [{name: 'productName', amount: 1}]
         };
 
         if(agreeCheckbox && (emailVal !== '')) {
-            axios.post(`${API_URL}`, formData)
+            axios.post(`${API_URL}/email-sender/sendBasketOrder`, formData)
                 .then(res => {
-                     $('#modal').modal('hide');
+                    $('#modal').modal('hide');
                     $('#success-modal').modal('show');
                 })
                 .catch(error => {
@@ -47,6 +51,7 @@ export const OnClickModal = (props) => {
                                    name="name"
                                    maxLength="256"
                                    placeholder="Имя"
+                                   required="required"
                                    type="text"
                                    value={modalName}
                                    onChange={(e) => setModalName(e.target.value)}
@@ -55,6 +60,7 @@ export const OnClickModal = (props) => {
                                        name="phone"
                                        placeholder="Телефон"
                                        mask="+7 (999) 999-99-99"
+                                       required="required"
                                        value={modalPhone}
                                        onChange={(e) => setModalPhone(e.target.value)}
                             />

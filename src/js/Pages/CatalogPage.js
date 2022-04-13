@@ -5,18 +5,18 @@ import {API_URL, REAL_FAKE_DATA} from "../constant";
 
 export const CatalogPage = (props) => {
     // значение по  умолчанию [] - пустой массив
-    const [catalogCategories, setCatalogCategories] = useState(REAL_FAKE_DATA)
+    const [catalogCategories, setCatalogCategories] = useState([])
 
     useEffect(() => {
         props.seoCallback({title: 'Каталог', description: 'Описание каталога'});
 
-        /*axios.get(`${API_URL}/product/getAllProducts`)
+        axios.get(`${API_URL}/product/getAllProducts`)
             .then(res => {
                 setCatalogCategories(res.data)
             })
             .catch(error => {
                 console.log(error);
-            });*/
+            });
     }, []);
 
     return (

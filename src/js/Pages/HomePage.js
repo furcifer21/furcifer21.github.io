@@ -29,17 +29,15 @@ export const HomePage = (props) => {
     useEffect(() => {
         props.seoCallback({title: 'Главная', description: 'Описание главной'});
 
-        // заглушка. получение данных по товарам для раздела "актуальный прайс"
-        /*axios.get(`${API_URL}/product/getAllProducts`)
+        axios.get(`${API_URL}/product/getAllProducts`)
             .then(res => {
                 setPriceData(res.data)
             })
             .catch(error => {
                 console.log(error);
-            });*/
+            });
 
-        // убрать после теста с бэком
-        setPriceData(REAL_FAKE_DATA);
+        /*setPriceData(REAL_FAKE_DATA);*/
     }, []);
 
     function sendForm(e) {
@@ -51,7 +49,7 @@ export const HomePage = (props) => {
         };
 
         if(checkPhone(phoneVal) || (phoneVal !== '')) {
-            axios.post(`${API_URL}`, formData)
+            axios.post(`${API_URL}/email-sender/sendOrder`, formData)
                 .then(res => {
                     $('#success-modal').modal('show');
                 })

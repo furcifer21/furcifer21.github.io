@@ -19,7 +19,7 @@ export const CategoryPage = (props) => {
     useEffect(() => {
         props.seoCallback({title: 'Категория товаров', description: 'Описание каталога'});
 
-        /*axios.get(`${API_URL}/product/getAllProducts`)
+        axios.get(`${API_URL}/product/getAllProducts`)
             .then(res => {
                 const response = res.data;
 
@@ -44,27 +44,7 @@ export const CategoryPage = (props) => {
             })
             .catch(error => {
                 console.log(error);
-            });*/
-
-        // убрать после теста с бэком
-        setCategoryMenu(REAL_FAKE_DATA);
-        REAL_FAKE_DATA.map((category, index) => {
-            if(category.typeSlug === categorySlug) {
-                setCategoryData(category);
-                setSubCategoryMenu(category.categories);
-
-                if(isSubCategoryPage) {
-                    category.categories.map((subCategory, index) => {
-                        if(encodeURI(subCategory.categorySlug) === location.pathname.split('/').pop()) {
-                            setProductsData(subCategory.products);
-                            setSubCategoryName(subCategory.category);
-                        }
-                    })
-                } else {
-                    setProductsData(category.products)
-                }
-            }
-        });
+            });
     }, [location]);
 
     return (
