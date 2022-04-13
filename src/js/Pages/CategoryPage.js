@@ -25,13 +25,13 @@ export const CategoryPage = (props) => {
 
                 setCategoryMenu(response);
                 response.map(category => {
-                    if(category.typeSlug === categorySlug) {
+                    if(category.typeSlug === decodeURI(categorySlug)) {
                         setCategoryData(category);
                         setSubCategoryMenu(category.categories);
 
                         if(isSubCategoryPage) {
                             category.categories.map((subCategory, index) => {
-                                if(encodeURI(subCategory.categorySlug) === location.pathname.split('/').pop()) {
+                                if(subCategory.categorySlug === decodeURI(location.pathname.split('/').pop())) {
                                     setProductsData(subCategory.products);
                                     setSubCategoryName(subCategory.category);
                                 }
@@ -79,7 +79,7 @@ export const CategoryPage = (props) => {
                         {subCategoryMenu.length > 0 &&
                             subCategoryMenu.map((sub, index) => {
                                 return (
-                                    <div key={`subcategory-${index}`} className={`category-row-item br r position-relative ${location.pathname === encodeURI(`/catalog/${categorySlug}/${sub.categorySlug}`) ? 'active' : ''}`}>
+                                    <div key={`subcategory-${index}`} className={`category-row-item br r position-relative ${decodeURI(location.pathname) === decodeURI(`/catalog/${categorySlug}/${sub.categorySlug}`) ? 'active' : ''}`}>
                                         <Link to={`/catalog/${categorySlug}/${sub.categorySlug}`} className="fake-link-block"></Link>
                                         {sub.category}<span>товаров: {sub.products.length}</span>
                                     </div>

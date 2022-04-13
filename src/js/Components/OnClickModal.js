@@ -10,9 +10,7 @@ export const OnClickModal = (props) => {
     const [modalPhone, setModalPhone] = useState('');
     const [modalEmail, setModalEmail] = useState('');
     const [agreeCheckbox, setAgreeCheckbox] = useState(true);
-    const profilePhoneState = useSelector(state => console.log(6,state), shallowEqual);
 
-    console.log(123,profilePhoneState)
     function sendForm(e) {
         e.preventDefault();
         const emailVal = modalEmail.trim();

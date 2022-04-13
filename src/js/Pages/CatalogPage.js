@@ -4,7 +4,6 @@ import axios from "axios";
 import {API_URL, REAL_FAKE_DATA} from "../constant";
 
 export const CatalogPage = (props) => {
-    // значение по  умолчанию [] - пустой массив
     const [catalogCategories, setCatalogCategories] = useState([])
 
     useEffect(() => {
